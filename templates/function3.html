@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全国公路网信息</title>
+    <link rel="stylesheet" href="../static/css/demo.css">
+    <link rel="stylesheet" href="../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <script src="../static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            securityJsCode:'5d448716aec58a5f679846abc9e3c899',
+        }
+    </script>
+    <script type="text/javascript" src="http://localhost:7474"></script>
+    <style>
+        #container3{
+            height:662px;
+            width:1536px;
+            background-color:#888888;
+        }
+    </style>
+
+</head>
+<body background="../static/images/6.jpg"
+      style="background-repeat:no-repeat;
+            background-attachment:fixed;
+            background-size:100% 100%;">
+    <div class="header">
+        <div class="container">
+            <div class="menu">
+                <a href="/function/menu">基于知识图谱的法律领域问答系统 / 数据展示模块</a>
+            </div>
+<!--            <div class="account1">-->
+<!--                    <a>登录成功</a>-->
+<!--                    <a href="/">退出</a>-->
+<!--                    <a href="/function/help">帮助与反馈</a>-->
+<!--            </div>-->
+<!--            <div style="clear: both"></div>-->
+        </div>
+    </div>
+    <div id="container3"></div>
+    <script>
+        var map = new AMap.Map('container3',{
+            center:[114.30,30.6],
+            zoom:6,
+            viewMode:'3D',
+            mapStyle:'amap://styles/599faa99008a5bf3d372aced4dfbbfda'
+
+        })
+
+        AMap.plugin(['AMap.ToolBar','AMap.Scale','AMap.MapType'],function(){
+            map.addControl(new AMap.ToolBar())
+            map.addControl(new AMap.scale())
+            map.addControl(new AMap.MapType())
+        })
+    </script>
+</body>
+</html>

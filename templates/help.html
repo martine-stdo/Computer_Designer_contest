@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>帮助与反馈</title>
+    <link rel="stylesheet" href="../static/css/demo.css">
+    <link rel="stylesheet" href="../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="menu">
+                <a href="/function/menu">大数据物流路径选择系统 / 帮助与反馈</a>
+            </div>
+            <div class="account1">
+                    <a>登录成功</a>
+                    <a href="/">退出</a>
+                    <a href="/function/help">帮助与反馈</a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div class="container">
+        <h2>反馈</h2>
+            <form method="post" action="/function/help_back">
+                <input type="text" class="form-control" name="question" placeholder="请输入您要反馈的信息(最多输入100字)">
+                <input type="submit" class="btn btn-primary btn-sm" value="提交">
+                <span>{{ back }}</span>
+            </form>
+        <h2>帮助</h2>
+            <table class="table">
+                <thead>
+                    <tr> <th>问题</th>  <th>解决方案</th> </tr>
+                </thead>
+                <tbody>
+                    <tr> <td></td><td></td></tr>
+                    <tr> <td></td><td></td></tr>
+                    <tr> <td></td><td></td></tr>
+                    <tr> <td></td><td></td></tr>
+                </tbody>
+            </table>
+    </div>
+</body>
+</html>

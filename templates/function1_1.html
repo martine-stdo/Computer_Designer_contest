@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>最优路线</title>
+    <link rel="stylesheet" href="../static/css/demo.css">
+    <link rel="stylesheet" href="../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <script src="../static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            securityJsCode:'5d448716aec58a5f679846abc9e3c899',
+        }
+    </script>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=cb4f4740a46aae018170aae8671fe911&plugin=AMap.PolylineEdito"></script>
+    <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+    <style>
+        #container3{
+            height:662px;
+            width:1536px;
+            background-color:#888888;
+        }
+    </style>
+
+</head>
+<body background="../static/images/6.jpg"
+      style="background-repeat:no-repeat;
+            background-attachment:fixed;
+            background-size:100% 100%;">
+    <div class="header">
+        <div class="container">
+            <div class="menu">
+                <a href="/function/menu">大数据物流路径选择系统 / 物流最优路线</a>
+            </div>
+            <div class="account1">
+                    <a>登录成功</a>
+                    <a href="/">退出</a>
+                    <a href="/function/help">帮助与反馈</a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div id="container3"></div>
+    <script  type="text/javascript">
+        var map = new AMap.Map('container3',{
+            center:[114.30,30.6],
+            zoom:5,
+            viewMode:'2D'
+        })
+
+        var path = {{data}};
+        var polyline = new AMap.Polyline({
+            path: path,
+            strokeWeight:5,
+            borderWeight: 10, // 线条宽度，默认为 1
+            strokeColor: 'red', // 线条颜色
+            lineJoin: 'round', // 折线拐点连接处样式
+        })
+
+        var path1 = {{data1}};
+        var polyline1 = new AMap.Polyline({
+            path: path1,
+            borderWeight: 3, // 线条宽度，默认为 1
+            strokeColor: 'blue', // 线条颜色
+            lineJoin: 'round' ,// 折线拐点连接处样式
+            strokeStyle: "dashed",
+            strokeDasharray: [10, 5],
+        })
+
+        var path2 = {{data2}};
+        var polyline2 = new AMap.Polyline({
+            path: path2,
+            borderWeight: 3, // 线条宽度，默认为 1
+            strokeColor: 'blue', // 线条颜色
+            lineJoin: 'round', // 折线拐点连接处样式
+            strokeStyle: "dashed",
+            strokeDasharray: [10, 5],
+        })
+
+        var path3 = {{data3}};
+        var polyline3 = new AMap.Polyline({
+            path: path3,
+            borderWeight: 3, // 线条宽度，默认为 1
+            strokeColor: 'blue', // 线条颜色
+            lineJoin: 'round', // 折线拐点连接处样式
+            strokeStyle: "dashed",
+            strokeDasharray: [10, 5],
+        })
+
+
+        var path4 = {{data4}};
+        var polyline4 = new AMap.Polyline({
+            path: path4,
+            borderWeight: 3, // 线条宽度，默认为 1
+            strokeColor: 'blue', // 线条颜色
+            lineJoin: 'round', // 折线拐点连接处样式
+            strokeStyle: "dashed",
+            strokeDasharray: [10, 5],
+        })
+
+        var path5 = {{data5}};
+        var polyline5 = new AMap.Polyline({
+            path: path5,
+            borderWeight: 3, // 线条宽度，默认为 1
+            strokeColor: 'blue', // 线条颜色
+            lineJoin: 'round', // 折线拐点连接处样式
+            strokeStyle: "dashed",
+            strokeDasharray: [10, 5],
+        });
+        map.add([polyline,polyline1,polyline2,polyline3,polyline4,polyline5]);
+        map.setFitView();
+    </script>
+</body>
+</html>

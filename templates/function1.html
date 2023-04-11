@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>知识问答模块</title>
+    <link rel="stylesheet" href="../static/css/demo.css">
+    <link rel="stylesheet" href="../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <script src="../static/js/jquery.min.js"></script>
+</head>
+<body background="../static/images/5.jpg"
+      style="background-repeat:no-repeat;
+            background-attachment:fixed;
+            background-size:100% 100%;">
+    <div class="header">
+        <div class="container">
+            <div class="menu">
+                <a href="/function/menu">基于知识图谱的法律领域问答系统 / 知识问答模块</a>
+            </div>
+<!--            <div class="account1">-->
+<!--                    <a>登录成功</a>-->
+<!--                    <a href="/">退出</a>-->
+<!--                    <a href="/function/help">帮助与反馈</a>-->
+<!--            </div>-->
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div class="container">
+<!--        <div class="introduce">-->
+<!--            <img src="../static/images/10.jpg">-->
+<!--        </div>-->
+        <div class="shu">
+            <form method="post" action="/function/function1_1">
+                <div class="form-group">
+                    <label>问题</label>
+                    <input type="text" class="form-control" name="origin" placeholder="问题">
+                </div>
+                <div class="form-group">
+                    <label>专业解答</label>
+                    <input type="text" class="form-control" name="destination" placeholder="专业解答">
+                </div>
+                <a>
+                    <input type="submit" class="btn btn-primary"></input>
+                </a>
+            </form>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</body>
+</html>

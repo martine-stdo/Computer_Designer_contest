@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智慧图谱模块</title>
+    <link rel="stylesheet" href="../static/css/demo.css">
+    <link rel="stylesheet" href="../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <script src="../static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            securityJsCode:'5d448716aec58a5f679846abc9e3c899',
+        }
+    </script>
+    <script type="text/javascript" src="http://localhost:7474/browser/"></script>
+    <style>
+        #container2{
+            height:662px;
+            width:1536px;
+        }
+    </style>
+
+</head>
+<body background="../static/images/6.jpg"
+      style="background-repeat:no-repeat;
+            background-attachment:fixed;
+            background-size:100% 100%;">
+    <div class="header">
+        <div class="container">
+            <div class="menu">
+                <a href="/function/menu">基于知识图谱的法律领域问答系统 / 智慧图谱模块</a>
+            </div>
+<!--            <div class="account1">-->
+<!--                    <a>登录成功</a>-->
+<!--                    <a href="/function/function2_1">最优路线与现有路线成本比较</a>-->
+<!--                    <a href="/">退出</a>-->
+<!--                    <a href="/function/help">帮助与反馈</a>-->
+<!--            </div>-->
+            <div style="clear: both"></div>
+        </div>
+        <div id="container2"></div>
+    </div>
+    <script src="../static/js/controller.js"></script>
+    <script type="text/javascript">
+        var map = new AMap.Map('container2',{
+            center:[114.30,30.6],
+            zoom:5,
+            viewMode:'2D'
+        })
+
+        var path1 = {{data1}};
+        var polyline1 = new AMap.Polyline({
+            path: path1,
+            borderWeight: 8, // 线条宽度，默认为 1
+            strokeColor: 'blue', // 线条颜色
+            lineJoin: 'round' // 折线拐点连接处样式
+        });
+        map.add(polyline1);
+
+        var path2 = {{data2}};
+        var polyline2 = new AMap.Polyline({
+            path: path2,
+            borderWeight: 8, // 线条宽度，默认为 1
+            strokeColor: '#28004D', // 线条颜色
+            lineJoin: 'round' // 折线拐点连接处样式
+        });
+        map.add(polyline2);
+
+        var path3 = {{data3}};
+        var polyline3 = new AMap.Polyline({
+            path: path3,
+            borderWeight: 8, // 线条宽度，默认为 1
+            strokeColor: 'red', // 线条颜色
+            lineJoin: 'round' // 折线拐点连接处样式
+        });
+        map.add(polyline3);
+
+        var path4 = {{data4}};
+        var polyline4 = new AMap.Polyline({
+            path: path4,
+            borderWeight: 8, // 线条宽度，默认为 1
+            strokeColor: 'black', // 线条颜色
+            lineJoin: 'round' // 折线拐点连接处样式
+        });
+        map.add(polyline4);
+
+        var path5 = {{data5}};
+        var polyline5 = new AMap.Polyline({
+            path: path5,
+            borderWeight: 8, // 线条宽度，默认为 1
+            strokeColor: 'green', // 线条颜色
+            lineJoin: 'round' // 折线拐点连接处样式
+        });
+        map.add(polyline5);
+    </script>
+</body>
+</html>
