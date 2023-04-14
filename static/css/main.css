@@ -95,3 +95,14 @@ a > div {
     transform: translateY(-100%);
   }
 }
+
+
+.nav-link, .nav-item {
+  display: inline-block;
+  color: rgb(255, 255, 255) !important;
+  text-decoration: none !important;
+  }
+  
+  .nav-link:hover, .nav-item:hover {
+  color: rgb(200, 200, 200) !important;
+  }
