@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='css/favicon.ico') }}">
+    <!-- Simple HttpErrorPages | MIT License | https://github.com/HttpErrorPages -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>联系我们💁</title>
+    <style type="text/css">
+        /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
+        html {
+            font-family: sans-serif;
+            line-height: 1.15;
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%
+        }
+
+        body {
+            margin: 0
+        }
+
+        article,
+        aside,
+        footer,
+        header,
+        nav,
+        section {
+            display: block
+        }
+
+        h1 {
+            font-size: 2em;
+            margin: .67em 0
+        }
+
+        figcaption,
+        figure,
+        main {
+            display: block
+        }
+
+        figure {
+            margin: 1em 40px
+        }
+
+        hr {
+            box-sizing: content-box;
+            height: 0;
+            overflow: visible
+        }
+
+        pre {
+            font-family: monospace, monospace;
+            font-size: 1em
+        }
+
+        a {
+            background-color: transparent;
+            -webkit-text-decoration-skip: objects
+        }
+
+        a:active,
+        a:hover {
+            outline-width: 0
+        }
+
+        abbr[title] {
+            border-bottom: none;
+            text-decoration: underline;
+            text-decoration: underline dotted
+        }
+
+        b,
+        strong {
+            font-weight: inherit
+        }
+
+        b,
+        strong {
+            font-weight: bolder
+        }
+
+        code,
+        kbd,
+        samp {
+            font-family: monospace, monospace;
+            font-size: 1em
+        }
+
+        dfn {
+            font-style: italic
+        }
+
+        mark {
+            background-color: #ff0;
+            color: #000
+        }
+
+        small {
+            font-size: 80%
+        }
+
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline
+        }
+
+        sub {
+            bottom: -.25em
+        }
+
+        sup {
+            top: -.5em
+        }
+
+        audio,
+        video {
+            display: inline-block
+        }
+
+        audio:not([controls]) {
+            display: none;
+            height: 0
+        }
+
+        img {
+            border-style: none
+        }
+
+        svg:not(:root) {
+            overflow: hidden
+        }
+
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            font-family: sans-serif;
+            font-size: 100%;
+            line-height: 1.15;
+            margin: 0
+        }
+
+        button,
+        input {
+            overflow: visible
+        }
+
+        button,
+        select {
+            text-transform: none
+        }
+
+        [type=reset],
+        [type=submit],
+        button,
+        html [type=button] {
+            -webkit-appearance: button
+        }
+
+        [type=button]::-moz-focus-inner,
+        [type=reset]::-moz-focus-inner,
+        [type=submit]::-moz-focus-inner,
+        button::-moz-focus-inner {
+            border-style: none;
+            padding: 0
+        }
+
+        [type=button]:-moz-focusring,
+        [type=reset]:-moz-focusring,
+        [type=submit]:-moz-focusring,
+        button:-moz-focusring {
+            outline: 1px dotted ButtonText
+        }
+
+        fieldset {
+            border: 1px solid silver;
+            margin: 0 2px;
+            padding: .35em .625em .75em
+        }
+
+        legend {
+            box-sizing: border-box;
+            color: inherit;
+            display: table;
+            max-width: 100%;
+            padding: 0;
+            white-space: normal
+        }
+
+        progress {
+            display: inline-block;
+            vertical-align: baseline
+        }
+
+        textarea {
+            overflow: auto
+        }
+
+        [type=checkbox],
+        [type=radio] {
+            box-sizing: border-box;
+            padding: 0
+        }
+
+        [type=number]::-webkit-inner-spin-button,
+        [type=number]::-webkit-outer-spin-button {
+            height: auto
+        }
+
+        [type=search] {
+            -webkit-appearance: textfield;
+            outline-offset: -2px
+        }
+
+        [type=search]::-webkit-search-cancel-button,
+        [type=search]::-webkit-search-decoration {
+            -webkit-appearance: none
+        }
+
+        ::-webkit-file-upload-button {
+            -webkit-appearance: button;
+            font: inherit
+        }
+
+        details,
+        menu {
+            display: block
+        }
+
+        summary {
+            display: list-item
+        }
+
+        canvas {
+            display: inline-block
+        }
+
+        template {
+            display: none
+        }
+
+        [hidden] {
+            display: none
+        }
+
+        /*! Simple HttpErrorPages | MIT X11 License | https://github.com/AndiDittrich/HttpErrorPages */
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            background-color: #21232a
+        }
+
+        body {
+            color: #fff;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+            padding: 0;
+            min-height: 100%;
+            -webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, .8);
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, .8);
+            display: table;
+            font-family: "Open Sans", Arial, sans-serif
+        }
+
+        h1 {
+            font-family: inherit;
+            font-weight: 500;
+            line-height: 1.1;
+            color: inherit;
+            font-size: 36px
+        }
+
+        h1 small {
+            font-size: 68%;
+            font-weight: 400;
+            line-height: 1;
+            color: #777
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-size: inherit;
+            border-bottom: dotted 1px #707070
+        }
+
+        .lead {
+            color: silver;
+            font-size: 21px;
+            line-height: 1.4
+        }
+
+        .cover {
+            display: table-cell;
+            vertical-align: middle;
+            padding: 0 20px
+        }
+
+        footer {
+            position: fixed;
+            width: 100%;
+            height: 40px;
+            left: 0;
+            bottom: 0;
+            color: #7f5454;
+            font-size: 14px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cover">
+        <h1>欢迎访问 <small>⬇️</small></h1>
+        <p class="lead">
+            你能通过以下方式联系到我们
+        </p>
+    </div>
+    <footer>
+        <a href="http://nighterdream.cn" rel="nofollow"><img
+                src="https://camo.githubusercontent.com/2d84a91827fe5272aa60911875358e725a9db67d57d1b433561b2a973d63faa0/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2545362538382539312545372539412538342545352538442539412545352541452541322d6e696768746572647265616d2e636e2d3430633566312e737667"
+                alt="博客"
+                data-canonical-src="https://img.shields.io/badge/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2-nighterdream.cn-40c5f1.svg"
+                style="max-width: 100%;"></a>
+        <a href="https://space.bilibili.com/33934287?spm_id_from=333.1007.0.0" rel="nofollow"><img
+                src="https://camo.githubusercontent.com/9c5afcc41e679719e7ba6d49c37a0e73545b127c55a4556edace4324f47a7473/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f42696c6942696c692d626c75652e7376673f6c6f676f3d62696c6962696c69266c6f676f436f6c6f723d7768697465"
+                alt="Bilibili"
+                data-canonical-src="https://img.shields.io/badge/BiliBili-blue.svg?logo=bilibili&amp;logoColor=white"
+                style="max-width: 100%;"></a>
+        <a href="mailto:nighterdream123@gmail.com"><img
+                src="https://camo.githubusercontent.com/02887598c5d249446fcbdeda40c422e01b322409de8b3caa9c2a1bd288da7f65/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2545392538322541452545372541452542312d6e696768746572647265616d31323340676d61696c2e636f6d2d6236393131382e737667"
+                alt="邮箱"
+                data-canonical-src="https://img.shields.io/badge/%E9%82%AE%E7%AE%B1-nighterdream123@gmail.com-b69118.svg"
+                style="max-width: 100%;"></a>
+    </footer>
+</body>
+
+</html>

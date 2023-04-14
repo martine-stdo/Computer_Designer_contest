@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>身份认证</title>
+{% endblock %}
+
+{% block body %}
+<!-- Add this line in your HTML file -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+<script>
+    // 使用CryptoJS对密码进行加密处理
+    function encryptPassword(password) {
+        return CryptoJS.MD5(password).toString();
+    }
+
+    function setCookie(name, value, expiryDays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (expiryDays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    function submitForm() {
+        const form = document.querySelector('form');
+        const passwordInput = form.querySelector('input[name="content"]');
+        const encryptedPassword = encryptPassword(passwordInput.value);
+        // 将加密后的密码放入FormData中，传输给服务器端
+        const formData = new FormData(form);
+        formData.set('content', encryptedPassword);
+        fetch("/authorize/", { method: "POST", body: formData })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === true) {
+                    const cookie = data.cookie
+                    setCookie('my_cookie', cookie, 999)
+                    window.location = '/'
+                } else {
+                    window.location = '/error_404/';
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
+    function onEnter(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            submitForm();
+        }
+    }
+
+    function showHint() {
+        const input = document.getElementById('content');
+        const hint = document.getElementById('hint');
+        hint.innerHTML = "请输入6位数字密码";
+        if (input.value.length != 6) {
+            hint.style.color = "red";
+        } else {
+            hint.style.color = "green";
+        }
+    }
+
+</script>
+<div class="authorize_player">
+    <h1>请输入认证密码</h1>
+    <div class="authorize_content">
+        <form name="passwd">
+            <input type="text" name="content" id="content" onkeydown="onEnter(event)" oninput="showHint()">
+            <span id="hint"></span>
+        </form>
+        <button onclick="submitForm()">提交</button>
+    </div>
+</div>
+
+{% endblock %}

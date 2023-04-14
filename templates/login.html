@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <title>用户登录</title>
     <link rel="stylesheet" href="../static/css/demo.css">
@@ -34,11 +35,11 @@
                 <input type="password" class="form-control" name="passwd" placeholder="密码">
             </div>
             <a>
-                <button type="submit" class="btn btn-primary" onclick="submitForm()">登录</button>
+                <button type="button" class="btn btn-primary" onclick="submitForm(event)">登录</button>
             </a>
             <!-- <span class="back">{{back}}</span> -->
             <div>注册即代表同意《用户使用协议》《隐私保护协议》</div>
-            <a class="x" href="/admin/register">没有账号去注册</a>
+            <a class="x" href="/admin/regist">没有账号去注册</a>
         </form>
     </div>
 </body>

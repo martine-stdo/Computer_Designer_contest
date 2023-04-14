@@ -1,4 +1,14 @@
-function submitForm() {
+function setCookie(name, value, expiryDays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (expiryDays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+
+function submitForm(event) {
+  event.preventDefault(); // 阻止表单的默认提交行为
+
   // 获取表单中的用户名和密码
   var username = document.getElementsByName('username')[0].value;
   var passwd = document.getElementsByName('passwd')[0].value;
@@ -9,21 +19,20 @@ function submitForm() {
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function() {
     var result = JSON.parse(xhr.responseText);
-    if (result.cookies) {
+    if (result.status == true) {
       // 如果后端返回的 JSON 对象中包含 cookies 字段，表示登录成功
       // 在前端设置 cookies，有效期为 7 天
-      var date = new Date();
-      date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
-      document.cookie = 'cookies=' + result.cookies + ';expires=' + date.toUTCString() + ';path=/';
-      
+        setCookie('my_cookie', result.cookie, 7);
+
       // 跳转到主页
       window.location.href = '/';
     } else {
-      // 如果后端返回的 JSON 对象中不包含 cookies 字段，表示登录失败
-      // 在页面中显示错误信息
-      var backSpan = document.getElementsByClassName('back')[0];
-      backSpan.innerHTML = '用户名或密码错误，请重试！';
+      // 显示错误信息
+      alert("用户不存在或密码错误");
     }
   };
   xhr.send(JSON.stringify({username: username, passwd: passwd}));
 }
+
+var loginBtn = document.querySelector('.btn');
+loginBtn.addEventListener('click', submitForm);
