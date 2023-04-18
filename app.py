@@ -2,6 +2,9 @@ from flask import Flask, render_template, url_for, request, redirect,flash
 from datetime import datetime
 import json
 import hashlib
+import pandas as pd
+from fuzzywuzzy import fuzz, process
+
 
 app = Flask(__name__)
 app.secret_key = 'jfsifsihfih'
@@ -85,17 +88,136 @@ def contact():
 def logout():
     return render_template('login.html')
 
+#返回主界面
+@app.route('/admin/return_main', methods=['GET'])
+def return_main():
+    if check_cookies(request):
+        return render_template('menu.html')
+    else:
+        return render_template('login.html')
+
 #模块一
 
 @app.route('/function/function1', methods=['GET'])
 def function1():
     if request.method == 'GET':
         if check_cookies(request):
-            return render_template('function1.html')
+            return render_template('QandA.html')
         else:
             return render_template('login.html')
     else:
         return render_template('error.html')
+
+
+
+#用户输入问题，提出五个最相近的问题，用户选择
+@app.route('/function/get_matched_questions', methods=['POST'])
+def get_matched_questions():
+    if request.method == 'POST':
+        if check_cookies(request):
+            data = request.get_json()
+            input_question = data.get("question")
+            module = data.get("module")
+
+            # 根据用户选择的模块读取相应的CSV文件
+            if module == "1":
+                file_name = "between_data/question_answer/交通.csv"
+            elif module == "2":
+                file_name = "between_data/question_answer/婚姻.csv"
+            elif module == "3":
+                file_name = "between_data/question_answer/债务.csv"
+            elif module == "4":
+                file_name = "between_data/question_answer/公司.csv"
+            elif module == "5":
+                file_name = "between_data/question_answer/刑事.csv"
+            elif module == "6":
+                file_name = "between_data/question_answer/劳动.csv"
+            elif module == "7":
+                file_name = "between_data/question_answer/合同.csv"
+            elif module == "8":
+                file_name = "between_data/question_answer/商标.csv"
+            elif module == "9":
+                file_name = "between_data/question_answer/房产.csv"
+            elif module == "10":
+                file_name = "between_data/question_answer/民商.csv"
+            elif module == "11":
+                file_name = "between_data/question_answer/民法.csv"
+            elif module == "12":
+                file_name = "between_data/question_answer/行政.csv"
+      
+            else:
+                return {"status": "error", "message": "无效的模块"}
+
+            # 读取 CSV 文件并获取问题列表
+            df = pd.read_csv(file_name)
+            questions = df['question'].tolist()
+
+            # 使用 FuzzyWuzzy 计算匹配度
+            match_results = {}
+            for q in questions:
+                score = fuzz.ratio(input_question, q)
+                match_results[q] = score
+
+            # 对匹配结果进行排序，找到匹配度最高的五个问题
+            sorted_match_results = sorted(match_results.items(), key=lambda x: x[1], reverse=True)
+            matched_questions = sorted_match_results[:5]
+
+            return {"status": "success", "matched_questions": matched_questions}
+        else:
+            return {"status": "error", "message": "用户未登录"}
+
+#根据用户的选择返回答案
+@app.route('/function/ask_question', methods=['POST'])
+def ask_question():
+    if request.method == 'POST':
+        if check_cookies(request):
+            data = request.get_json()
+            input_question = data.get("question")
+            module = data.get("module")
+
+            if module == "1":
+                file_name = "between_data/question_answer/交通.csv"
+            elif module == "2":
+                file_name = "between_data/question_answer/婚姻.csv"
+            elif module == "3":
+                file_name = "between_data/question_answer/债务.csv"
+            elif module == "4":
+                file_name = "between_data/question_answer/公司.csv"
+            elif module == "5":
+                file_name = "between_data/question_answer/刑事.csv"
+            elif module == "6":
+                file_name = "between_data/question_answer/劳动.csv"
+            elif module == "7":
+                file_name = "between_data/question_answer/合同.csv"
+            elif module == "8":
+                file_name = "between_data/question_answer/商标.csv"
+            elif module == "9":
+                file_name = "between_data/question_answer/房产.csv"
+            elif module == "10":
+                file_name = "between_data/question_answer/民商.csv"
+            elif module == "11":
+                file_name = "between_data/question_answer/民法.csv"
+            elif module == "12":
+                file_name = "between_data/question_answer/行政.csv"
+            else:
+                return {"status": "error", "message": "无效的模块"}
+
+            df = pd.read_csv(file_name)
+            questions = df['question'].tolist()
+
+            # 在此处，我们已经知道用户选择的问题，因此无需进行模糊匹配
+            # 只需根据问题查找对应的答案即可
+            try:
+                answer = df.loc[df['question'] == input_question, 'answer'].iloc[0]
+                return {"status": "success", "answer": answer}
+            except IndexError:
+                return {"status": "error", "message": "未找到问题对应的答案"}
+
+        else:
+            return {"status": "error", "message": "用户未登录"}
+
+
+
     
 #模块二
 @app.route('/function/function2', methods=['GET'])
@@ -144,4 +266,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(port=8000)
+    app.run(port=8000, debug=True)

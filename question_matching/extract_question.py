@@ -70,6 +70,9 @@
 
 import pandas as pd
 from fuzzywuzzy import fuzz, process
+import os
+
+
 
 # 显示所有可选的选项
 options = {
@@ -89,7 +92,7 @@ while True:
         print("请输入正确的选项")
         continue
     # 读取相应的csv文件
-    file_name = '../between_data/question_answer/' + options[choice] + ".csv"
+    file_name = 'between_data/question_answer/' + options[choice] + ".csv"
     df = pd.read_csv(file_name)
 
     # 定义一个函数用于模糊匹配问题
