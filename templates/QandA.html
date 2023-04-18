@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>知识问答模块</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<!-- 定义导航栏 -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+
+      <!-- 导航栏商标 -->
+      <div class="align-left">
+        <a class="navbar-brand" href="#">基于知识图谱的法律问答系统</a>
+      </div>
+
+      <!-- 导航入口 -->
+      <div>
+        <ul class="navbar-nav">
+          <!-- 条目 -->
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/return_main">返回</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+    <div class="container" style="margin-top: -1px;"> <!-- 修改此处的margin-top值 -->
+        <div class="shu">
+            <form id="questionForm">
+                <div class="form-group">
+                    <label>选择模块</label>
+                    <select class="form-control" id="module" name="module">
+                        <option value="1">交通</option>
+                        <option value="2">婚姻</option>
+                        <option value="3">债务</option>
+                        <option value="4">公司</option>
+                        <option value="5">刑事</option>
+                        <option value="6">劳动</option>
+                        <option value="7">合同</option>
+                        <option value="8">商标</option>
+                        <option value="9">房产</option>
+                        <option value="10">民商</option>
+                        <option value="11">民法</option>
+                        <option value="12">行政</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>问题</label>
+                    <input type="text" class="form-control" name="origin" placeholder="问题">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="get_matched_questions()">查找匹配问题</button>
+            </form>
+            <div id="matched-questions" style="margin-top: 20px;"></div>
+            <form id="answerForm">
+                <div class="form-group">
+                    <label>专业解答</label>
+                    <textarea type="text" class="form-control" name="destination" placeholder="专业解答" readonly></textarea>
+                </div>
+            </form>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <script>
+        function get_matched_questions() {
+            var formData = {
+                "module": $("#module").val(),
+                "question": $("input[name=origin]").val()
+            };
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/function/get_matched_questions",
+                data: JSON.stringify(formData),
+                dataType: "json",
+                success: function (data) {
+                    if (data.status === "success") {
+                        var matched_questions = data.matched_questions;
+                        var html = "<ul>";
+                        for (var i = 0; i < matched_questions.length; i++) {
+                            var question = matched_questions[i][0];
+                            html += '<li><a href="#" onclick="get_answer(\'' + question + '\')">' + question + '</a></li>';
+                        }
+                        html += "</ul>";
+                        $("#matched-questions").html(html);
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function (e) {
+                    console.log("ERROR: ", e);
+                    alert("Error!");
+                }
+            });
+        }
+
+        function get_answer(question) {
+            var formData = {
+                "module": $("#module").val(),
+                "question": question
+            };
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/function/ask_question",
+                data: JSON.stringify(formData),
+                dataType: "json",
+                success: function (data) {
+                    if (data.status === "success") {
+                        $("textarea[name=destination]").val(data.answer);
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function (e) {
+                    console.log("ERROR: ", e);
+                    alert("Error!");
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
