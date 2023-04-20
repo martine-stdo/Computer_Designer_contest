@@ -106,3 +106,19 @@ a > div {
   .nav-link:hover, .nav-item:hover {
   color: rgb(200, 200, 200) !important;
   }
+
+  .nav-item {
+    padding-top: 7px;
+  }
+
+  .nav-item:last-child {
+    margin-right: -15px;
+  }
+  
+  .logo-image {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+

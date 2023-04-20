@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>词云展示</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Lightbox CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
+    <style>
+        /* Loading Animation */
+        .loading-animation {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .loading-animation .spinner-border {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loading-animation">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">词云展示</h2>
+        <div class="row">
+            <!-- 示例图片，您需要将图片路径替换为实际路径 -->
+            <div class="col-md-4 mb-4">
+              <a href="{{ url_for('static', filename='wordcloud_image/交通.png') }}" data-lightbox="wordcloud-gallery" data-title="交通">
+                <img src="{{ url_for('static', filename='wordcloud_image/交通.png') }}" class="img-fluid">
+                </a>
+            </div>
+
+            <!-- 在此处添加其他词云图片 -->
+        </div>
+    </div>
+
+    <!-- jQuery, Bootstrap and Lightbox JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Show loading animation
+            $(".loading-animation").show();
+
+            // Hide loading animation when images are loaded
+            $("img").on("load", function() {
+                $(".loading-animation").hide();
+            });
+        });
+    </script>
+</body>
+</html>

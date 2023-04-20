@@ -5,7 +5,6 @@ import hashlib
 import pandas as pd
 from fuzzywuzzy import fuzz, process
 
-
 app = Flask(__name__)
 app.secret_key = 'jfsifsihfih'
 
@@ -216,15 +215,13 @@ def ask_question():
         else:
             return {"status": "error", "message": "用户未登录"}
 
-
-
     
 #模块二
 @app.route('/function/function2', methods=['GET'])
 def function2():
     if request.method == 'GET':
         if check_cookies(request):
-            return render_template('function2.html')
+            return render_template('Knowledge_graph_display.html')
         else:
             return render_template('login.html')
     else:
@@ -235,7 +232,7 @@ def function2():
 def function3():
     if request.method == 'GET':
         if check_cookies(request):
-            return render_template('function3.html')
+            return render_template('word.html')
         else:
             return render_template('login.html')
     else:
@@ -262,8 +259,5 @@ def index():
     else:
         return render_template('error.html')
     
-
-
-
 if __name__ == '__main__':
     app.run(port=8000, debug=True)

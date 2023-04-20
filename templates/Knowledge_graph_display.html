@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neo4j Graph Visualization</title>
+    <style>
+        #graph {
+            width: 100%;
+            height: 600px;
+            border: 1px solid lightgray;
+        }
+    </style>
+    <script src="https://unpkg.com/neo4j-driver@4.3.3/lib/browser/neo4j-web.min.js"></script>
+    <script src="..\static\plugins\node_modules\vis-network\standalone\umd\vis-network.min.js"></script>
+    <script>
+        const { driver, auth } = neo4j;
+
+        // 创建Neo4j驱动程序实例
+        const neo4jDriver = driver('bolt://localhost:7687', auth.basic('neo4j', '12345678'));
+
+        // 获取图谱数据
+        async function getGraphData(moduleName) {
+            const session = neo4jDriver.session();
+            try {
+                const queryString = `MATCH p=(p1:模块 {name: '${moduleName}'})-[r:包含]-() RETURN p`;
+                const result = await session.run(queryString);
+                return result.records;
+            } finally {
+                session.close();
+            }
+        }
+
+        // 将图谱数据转换为vis.js兼容的格式
+        function prepareDataForVis(records) {
+    const nodeMap = new Map();
+    const edgeMap = new Map();
+
+    records.forEach(record => {
+        const path = record.get('p');
+        const segments = path.segments;
+
+        segments.forEach(segment => {
+            const n = segment.start;
+            const m = segment.end;
+            const r = segment.relationship;
+
+            nodeMap.set(n.identity.toString(), { id: n.identity.toString(), label: n.properties.name });
+            nodeMap.set(m.identity.toString(), { id: m.identity.toString(), label: m.properties.name });
+
+            const edgeId = `${n.identity.toString()}-${m.identity.toString()}`;
+            edgeMap.set(edgeId, { from: n.identity.toString(), to: m.identity.toString(), label: r.type });
+        });
+    });
+
+    const nodes = Array.from(nodeMap.values());
+    const edges = Array.from(edgeMap.values());
+
+    return { nodes: new vis.DataSet(nodes), edges: new vis.DataSet(edges) };
+}
+
+
+        // 渲染关系图谱
+        async function renderGraph(moduleName) {
+            const graphContainer = document.getElementById('graph');
+            graphContainer.innerHTML = ''; // 清除容器内容
+
+            const graphData = await getGraphData(moduleName);
+            const { nodes, edges } = prepareDataForVis(graphData);
+
+            const options = {
+                nodes: {
+        shape: 'dot',
+        size: 20,
+        font: {
+            size: 14,
+            color: '#FFFFFF' // 更改字体颜色为白色
+        },
+        borderWidth: 2,
+        color: {
+            border: '#222222', // 更改边框颜色为深灰色
+            background: '#5A9', // 更改背景颜色为科技绿色
+            highlight: {
+                border: '#999999', // 更改高亮边框颜色为浅灰色
+                background: '#A5F' // 更改高亮背景颜色为科技紫色
+            }
+        }
+    },
+
+    edges: {
+        width: 2,
+        color: {
+            color: '#BBBBBB', // 更改边颜色为浅灰色
+            highlight: '#A5F' // 更改高亮边颜色为科技紫色
+        },
+        arrows: {
+            to: {
+                enabled: true,
+                scaleFactor: 0.5
+            }
+        }
+    },
+    physics: {
+    stabilization: {
+        enabled: true,
+        iterations: 1000,
+        updateInterval: 100,
+        onlyDynamicEdges: false,
+        fit: true
+    },
+    barnesHut: {
+        gravitationalConstant: -2000,
+        centralGravity: 0.3,
+        springLength: 95,
+        springConstant: 0.04,
+        damping: 0.15, // 将damping值从0.09提高到0.15
+        avoidOverlap: 0.1
+        }
+    }
+};
+
+
+            const network = new vis.Network(graphContainer, { nodes, edges }, options);
+        }
+
+        // 在页面加载时调用renderGraph
+        window.addEventListener('DOMContentLoaded', () => {
+            const loadModuleButton = document.getElementById('load-module');
+            loadModuleButton.addEventListener('click', () => {
+                const moduleSelect = document.getElementById('module-select');
+                const moduleName = moduleSelect.value;
+                renderGraph(moduleName);
+            });
+
+            // 初始渲染图谱（可选择任意默认模块）
+            renderGraph('交通');
+        });
+    </script>
+
+</head>
+<body>
+    <div>
+        <label for="module-select">选择模块：</label>
+        <select id="module-select">
+            <option value="交通">交通</option>
+            <option value="婚姻">婚姻</option>
+            <option value="债务">债务</option>
+            <option value="公司">公司</option>
+            <option value="刑事">刑事</option>
+            <option value="劳动">劳动</option>
+            <option value="合同">合同</option>
+            <option value="商标">商标</option>
+            <option value="房产">房产</option>
+            <option value="民商">民商</option>
+            <option value="民法">民法</option>
+            <option value="行政">行政</option>
+        </select>
+        <button id="load-module">加载模块</button>
+    </div>
+    
+    <div id="graph"></div>
+</body>
+</html>

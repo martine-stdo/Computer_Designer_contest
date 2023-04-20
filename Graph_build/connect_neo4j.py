@@ -45,7 +45,6 @@ def connect_neo4j_answer_to_question(folder_path):
         print(count)
     return count
 
-
 def connect_neo4j_model_to_answer(folder_path):
     count = 0
     for filename in os.listdir(folder_path):
@@ -86,7 +85,5 @@ def connect_neo4j_model_to_answer(folder_path):
         print(count)
     return count
 
-
 count = connect_neo4j_model_to_answer('between_data\model')
 print(count)
-
