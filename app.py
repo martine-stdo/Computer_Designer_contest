@@ -5,7 +5,7 @@ import hashlib
 import pandas as pd
 from fuzzywuzzy import fuzz, process
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder='static')
 app.secret_key = 'jfsifsihfih'
 
 cookie = "dfjsiedhfuhuefheufhewf"
@@ -232,7 +232,7 @@ def function2():
 def function3():
     if request.method == 'GET':
         if check_cookies(request):
-            return render_template('word.html')
+            return render_template('wordcloud.html')
         else:
             return render_template('login.html')
     else:

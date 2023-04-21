@@ -85,5 +85,6 @@ def connect_neo4j_model_to_answer(folder_path):
         print(count)
     return count
 
-count = connect_neo4j_model_to_answer('between_data\model')
+# count = connect_neo4j_model_to_answer('between_data\model')
+count = connect_neo4j_answer_to_question('between_data\question_answer')
 print(count)
