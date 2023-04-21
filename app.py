@@ -79,7 +79,7 @@ def register():
 #联系我们界面
 @app.route('/contactme', methods=['GET'])
 def contact():
-    return render_template('contactme.html')
+    return render_template('reachme.html')
 
 
 #退出界面   

@@ -49,6 +49,5 @@ def extract_wordcloud(folder_path):
             wc.to_file(filename)
             count += 1
     return count
-
 count = extract_wordcloud('between_data/model')
 print(count)
