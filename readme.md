@@ -20,6 +20,30 @@
 5.词云界面也还在完善中
 
 
+****
+###界面展示
+#####1.登录界面
+[![p9V4KeO.png](https://s1.ax1x.com/2023/04/22/p9V4KeO.png)](https://imgse.com/i/p9V4KeO)
+#####2.注册界面
+[![p9V4ZS1.png](https://s1.ax1x.com/2023/04/22/p9V4ZS1.png)](https://imgse.com/i/p9V4ZS1)
+#####3.主界面
+[![p9V4nOK.png](https://s1.ax1x.com/2023/04/22/p9V4nOK.png)](https://imgse.com/i/p9V4nOK)
+#####4.问答模块
+[![p9V4eQx.png](https://s1.ax1x.com/2023/04/22/p9V4eQx.png)](https://imgse.com/i/p9V4eQx)
+#####5.图谱可视化模块
+[![p9V4QTe.png](https://s1.ax1x.com/2023/04/22/p9V4QTe.png)](https://imgse.com/i/p9V4QTe)
+#####6.词云展示
+[![p9V4my6.png](https://s1.ax1x.com/2023/04/22/p9V4my6.png)](https://imgse.com/i/p9V4my6)
+#####7.数据库展示（待定，还没做好😀）
+[![xj0idK.jpg](https://s1.ax1x.com/2022/11/06/xj0idK.jpg)](https://imgse.com/i/xj0idK)
+#####8.联系我们界面
+[![p9V4MwD.png](https://s1.ax1x.com/2023/04/22/p9V4MwD.png)](https://imgse.com/i/p9V4MwD)
+
+
+
+
+
+
 
 <div style="text-align: center;">
   <footer>
