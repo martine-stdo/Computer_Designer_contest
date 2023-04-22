@@ -12,16 +12,11 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 	<style>
-		html,
-		body {
-			height: 100%;
-			margin: 0;
-		}
-
 		.body_background {
 			background-image: url('{{ url_for("static", filename="images/Yangtze.jpg") }}');
 			background-position: center;
 			background-size: cover;
+			background-attachment: scroll;
 		}
 
 		.header {
@@ -164,7 +159,6 @@
 		</h1>
 		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-11 login_div">
 			<h3 style="padding-top: 20px;">基于知识图谱的法律问答系统</h3>
-			<h4>本系统基于flask框架,neo4j开发</h4>
             <h4>开发人员</h4>
 			<div class="form-group">
 				<p>大数据2019级学生吴日升</p>
@@ -183,7 +177,7 @@
 
 	</center>
 
-	<footer style="display: flex; justify-content: center; align-items: center; position: absolute; bottom: 0; width: 100%;">
+	<footer style="display: flex; justify-content: center; align-items: center; position: fixed; bottom: 10px; width: 100%;">
         <a style="margin: 0 10px;" href="http://nighterdream.cn" rel="nofollow" href="http://nighterdream.cn" rel="nofollow"><img
                 src="https://camo.githubusercontent.com/2d84a91827fe5272aa60911875358e725a9db67d57d1b433561b2a973d63faa0/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2545362538382539312545372539412538342545352538442539412545352541452541322d6e696768746572647265616d2e636e2d3430633566312e737667"
                 alt="博客"

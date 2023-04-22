@@ -3,33 +3,59 @@
 
 <head>
   <link rel="icon" href="/static/css/favicon.ico">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>智慧图普</title>
-  <link rel="stylesheet" href="\static\css\data_visual.css">
-  <style>
-    .page1 {
-      position: relative;
-      z-index: 1;
-    }
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>智慧图普</title>
+<link rel="stylesheet" href="\static\css\data_visual.css">
+<style>
+  /* 缩小下拉列表和按钮的大小 */
+  .form-inline {
+    transform: scale(0.4);
+    transform-origin: left;
+    margin-left: -40px;
+    position: relative;
+    z-index: 999;
+    /* 添加一个足够大的z-index值 */
+  }
 
-    .page2 {
-      position: absolute;
-      top: 50px;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 10;
-    }
+  #module-select {
+    position: relative;
+    z-index: 999;
+  }
 
-    #graph {
-      width: 100%;
-      height: 700px;
-      border: none;
-    }
-  </style>
-  <script src="https://unpkg.com/neo4j-driver@4.3.3/lib/browser/neo4j-web.min.js"></script>
-  <script src="\static\plugins\node_modules\vis-network\standalone\umd\vis-network.min.js"></script>
+  /* 缩小下拉列表中选项的字体大小 */
+  #module-select option {
+    font-size: 18px;
+    /* 将字体大小设置为12px（或其他适合的大小） */
+  }
+
+
+  .page1 {
+    position: relative;
+    z-index: 1;
+  }
+
+  .page2 {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+
+  #graph {
+    width: 100%;
+    height: 700px;
+    border: none;
+    margin-top: -120px;
+    /* 使用负值来上移显示范围 */
+  }
+</style>
+<script src="https://unpkg.com/neo4j-driver@4.3.3/lib/browser/neo4j-web.min.js"></script>
+<script src="\static\plugins\node_modules\vis-network\standalone\umd\vis-network.min.js"></script>
 </head>
 
 <body>
@@ -38,9 +64,9 @@
       <h1>智慧图谱</h1>
       <div class="showTime">当前时间：2020年3月17-0时54分14秒</div>
       <script>
-          // 第一个网页的定时器脚本
+        // 第一个网页的定时器脚本
 
-          var t = null;
+        var t = null;
         t = setTimeout(time, 1000); //開始运行
         function time() {
           clearTimeout(t); //清除定时器
@@ -74,160 +100,166 @@
       </div>
     </header>
     <section class="mainbox">
-        <div class="map">
-          <div class="chart"></div>
-          <div class="map1"></div>
-          <div class="map2"></div>
-        </div>
+      <div class="map">
+        <div class="chart"></div>
+        <div class="map1"></div>
+        <div class="map2"></div>
+      </div>
     </section>
   </div>
   <div class="page2">
     <!-- 将第二个网页的内容放在这里 -->
     <div>
-      <label for="module-select">：</label>
-      <select id="module-select">
-        <option value="交通">交通</option>
-            <option value="婚姻">婚姻</option>
-            <option value="债务">债务</option>
-            <option value="公司">公司</option>
-            <option value="刑事">刑事</option>
-            <option value="劳动">劳动</option>
-            <option value="合同">合同</option>
-            <option value="商标">商标</option>
-            <option value="房产">房产</option>
-            <option value="民商">民商</option>
-            <option value="民法">民法</option>
-            <option value="行政">行政</option>
-      </select>
-      <button id="load-module">加载模块</button>
-    </div>
-    <div id="graph"></div>
-    <script>
-      const { driver, auth } = neo4j;
+      <div class="form-inline">
+        <label for="module-select" class="mr-2">选择模块：</label>
+        <select id="module-select" class="form-control mr-2">
+          <option value="交通">交通</option>
+          <option value="婚姻">婚姻</option>
+          <option value="债务">债务</option>
+          <option value="公司">公司</option>
+          <option value="刑事">刑事</option>
+          <option value="劳动">劳动</option>
+          <option value="合同">合同</option>
+          <option value="商标">商标</option>
+          <option value="房产">房产</option>
+          <option value="民商">民商</option>
+          <option value="民法">民法</option>
+          <option value="行政">行政</option>
+        </select>
+        <button id="load-module" class="btn btn-primary">加载模块</button>
+      </div>
+      <div id="graph"></div>
+      <script>
+        const { driver, auth } = neo4j;
 
-      // 创建Neo4j驱动程序实例
-      const neo4jDriver = driver('bolt://localhost:7687', auth.basic('neo4j', '12345678'));
+        // 创建Neo4j驱动程序实例
+        const neo4jDriver = driver('bolt://localhost:7687', auth.basic('neo4j', '12345678'));
 
-      // 获取图谱数据
-      async function getGraphData(moduleName) {
-        const session = neo4jDriver.session();
-        try {
-          const queryString = `MATCH p=(p1:模块 {name: '${moduleName}'})-[r:包含]-() RETURN p`;
-          const result = await session.run(queryString);
-          return result.records;
-        } finally {
-          session.close();
-        }
-      }
-
-      // 将图谱数据转换为vis.js兼容的格式
-      function prepareDataForVis(records) {
-        const nodeMap = new Map();
-        const edgeMap = new Map();
-
-        records.forEach(record => {
-          const path = record.get('p');
-          const segments = path.segments;
-
-          segments.forEach(segment => {
-            const n = segment.start;
-            const m = segment.end;
-            const r = segment.relationship;
-
-            nodeMap.set(n.identity.toString(), { id: n.identity.toString(), label: n.properties.name });
-            nodeMap.set(m.identity.toString(), { id: m.identity.toString(), label: m.properties.name });
-
-            const edgeId = `${n.identity.toString()}-${m.identity.toString()}`;
-            edgeMap.set(edgeId, { from: n.identity.toString(), to: m.identity.toString(), label: r.type });
-          });
-        });
-
-        const nodes = Array.from(nodeMap.values());
-        const edges = Array.from(edgeMap.values());
-
-        return { nodes: new vis.DataSet(nodes), edges: new vis.DataSet(edges) };
-      }
-
-
-      // 渲染关系图谱
-      async function renderGraph(moduleName) {
-        const graphContainer = document.getElementById('graph');
-        graphContainer.innerHTML = ''; // 清除容器内容
-
-        const graphData = await getGraphData(moduleName);
-        const { nodes, edges } = prepareDataForVis(graphData);
-
-        const options = {
-          nodes: {
-            shape: 'dot',
-            size: 20,
-            font: {
-              size: 14,
-              color: '#FFFFFF' // 更改字体颜色为白色
-            },
-            borderWidth: 2,
-            color: {
-              border: '#8fd3e9', // 更改边框颜色为深灰色
-              background: '#a4dbfd', // 更改背景颜色为科技绿色
-              highlight: {
-                border: '#999999', // 更改高亮边框颜色为浅灰色
-                background: '#A5F' // 更改高亮背景颜色为科技紫色
-              }
-            }
-          },
-
-          edges: {
-            width: 2,
-            color: {
-              color: '#91c2fd', // 更改边颜色为浅灰色
-              highlight: '#e683ad' // 更改高亮边颜色为科技紫色
-            },
-            arrows: {
-              to: {
-                enabled: true,
-                scaleFactor: 0.5
-              }
-            }
-          },
-          physics: {
-            stabilization: {
-              enabled: true,
-              iterations: 1000,
-              updateInterval: 100,
-              onlyDynamicEdges: false,
-              fit: true
-            },
-            barnesHut: {
-              gravitationalConstant: -2000,
-              centralGravity: 0.3,
-              springLength: 95,
-              springConstant: 0.04,
-              damping: 0.15, // 将damping值从0.09提高到0.15
-              avoidOverlap: 0.1
-            }
+        // 获取图谱数据
+        async function getGraphData(moduleName) {
+          const session = neo4jDriver.session();
+          try {
+            const queryString = `MATCH p=(p1:模块 {name: '${moduleName}'})-[r:包含]-() RETURN p`;
+            const result = await session.run(queryString);
+            return result.records;
+          } finally {
+            session.close();
           }
-        };
+        }
+
+        // 将图谱数据转换为vis.js兼容的格式
+        function prepareDataForVis(records) {
+          const nodeMap = new Map();
+          const edgeMap = new Map();
+
+          records.forEach(record => {
+            const path = record.get('p');
+            const segments = path.segments;
+
+            segments.forEach(segment => {
+              const n = segment.start;
+              const m = segment.end;
+              const r = segment.relationship;
+
+              nodeMap.set(n.identity.toString(), { id: n.identity.toString(), label: n.properties.name });
+              nodeMap.set(m.identity.toString(), { id: m.identity.toString(), label: m.properties.name });
+
+              const edgeId = `${n.identity.toString()}-${m.identity.toString()}`;
+              edgeMap.set(edgeId, { from: n.identity.toString(), to: m.identity.toString(), label: r.type });
+            });
+          });
+
+          const nodes = Array.from(nodeMap.values());
+          const edges = Array.from(edgeMap.values());
+
+          return { nodes: new vis.DataSet(nodes), edges: new vis.DataSet(edges) };
+        }
 
 
-        const network = new vis.Network(graphContainer, { nodes, edges }, options);
-      }
+        // 渲染关系图谱
+        async function renderGraph(moduleName) {
+          const graphContainer = document.getElementById('graph');
+          graphContainer.innerHTML = ''; // 清除容器内容
 
-      // 在页面加载时调用renderGraph
-      window.addEventListener('DOMContentLoaded', () => {
-        const loadModuleButton = document.getElementById('load-module');
-        loadModuleButton.addEventListener('click', () => {
-          const moduleSelect = document.getElementById('module-select');
-          const moduleName = moduleSelect.value;
-          renderGraph(moduleName);
+          const graphData = await getGraphData(moduleName);
+          const { nodes, edges } = prepareDataForVis(graphData);
+
+          const options = {
+            nodes: {
+              shape: 'dot',
+              size: 20,
+              font: {
+                size: 14,
+                color: '#FFFFFF' // 更改字体颜色为白色
+              },
+              borderWidth: 2,
+              color: {
+                border: '#8fd3e9', // 更改边框颜色为深灰色
+                background: '#a4dbfd', // 更改背景颜色为科技绿色
+                highlight: {
+                  border: '#999999', // 更改高亮边框颜色为浅灰色
+                  background: '#A5F' // 更改高亮背景颜色为科技紫色
+                }
+              }
+            },
+
+            edges: {
+              width: 2,
+              color: {
+                color: '#91c2fd', // 更改边颜色为浅灰色
+                highlight: '#e683ad' // 更改高亮边颜色为科技紫色
+              },
+              arrows: {
+                to: {
+                  enabled: true,
+                  scaleFactor: 0.5
+                }
+              }
+            },
+            physics: {
+              stabilization: {
+                enabled: true,
+                iterations: 1000,
+                updateInterval: 100,
+                onlyDynamicEdges: false,
+                fit: true
+              },
+              barnesHut: {
+                gravitationalConstant: -2000,
+                centralGravity: 0.3,
+                springLength: 95,
+                springConstant: 0.04,
+                damping: 0.15, // 将damping值从0.09提高到0.15
+                avoidOverlap: 0.1
+              }
+            }
+          };
+
+
+          const network = new vis.Network(graphContainer, { nodes, edges }, options);
+        }
+
+        // 在页面加载时调用renderGraph
+        window.addEventListener('DOMContentLoaded', () => {
+          const loadModuleButton = document.getElementById('load-module');
+          loadModuleButton.addEventListener('click', () => {
+            const moduleSelect = document.getElementById('module-select');
+            const moduleName = moduleSelect.value;
+            renderGraph(moduleName);
+          });
+
+          // 初始渲染图谱（可选择任意默认模块）
+          renderGraph('行政');
         });
+      </script>
+    </div>
+    <script src="\static\visual_js\flexible.js"></script>
+    <script src="\static\visual_js\jquery.js"></script>
+    <!-- Add jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Add Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        // 初始渲染图谱（可选择任意默认模块）
-        renderGraph('交通');
-      });
-    </script>
-  </div>
-  <script src="\static\visual_js\flexible.js"></script>
-  <script src="\static\visual_js\jquery.js"></script>
 </body>
 
 </html>
