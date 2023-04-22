@@ -97,7 +97,7 @@ def return_main():
 
 #模块一
 
-@app.route('/function/function1', methods=['GET'])
+@app.route('/admin/QandA/', methods=['GET'])
 def function1():
     if request.method == 'GET':
         if check_cookies(request):
@@ -217,18 +217,18 @@ def ask_question():
 
     
 #模块二
-@app.route('/function/function2', methods=['GET'])
+@app.route('/admin/start_graph/', methods=['GET'])
 def function2():
     if request.method == 'GET':
         if check_cookies(request):
-            return render_template('Knowledge_graph_display.html')
+            return render_template('data_visual.html')
         else:
             return render_template('login.html')
     else:
         return render_template('error.html')
     
 #模块三
-@app.route('/function/function3', methods=['GET'])
+@app.route('/adim/wordcloud/', methods=['GET'])
 def function3():
     if request.method == 'GET':
         if check_cookies(request):
@@ -243,7 +243,7 @@ def function3():
 def function4():
     if request.method == 'GET':
         if check_cookies(request):
-            return render_template('function4.html')
+            return render_template('data_visual.html')
         else:
             return render_template('login.html')
     else:

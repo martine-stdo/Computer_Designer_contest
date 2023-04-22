@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "lib-flexible": "^0.3.2",
     "vis-network": "^9.1.6"
   }
 }

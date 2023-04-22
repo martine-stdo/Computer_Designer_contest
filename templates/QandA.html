@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="icon" href="/static/css/favicon.ico">
-
     <meta charset="UTF-8">
 
-    <title>知识问答模块</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <style>
+        body {
+            background-image: url({{ url_for('static', filename='images/R.png') }});
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+
+
+    <title>知识问答</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/css/bootstrap.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
-<!-- 定义导航栏 -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
+    <!-- 定义导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
 
-      <!-- 导航栏商标 -->
-      <div class="align-left">
-        <a class="navbar-brand" href="#">基于知识图谱的法律问答系统</a>
-      </div>
+            <!-- 导航栏商标 -->
+            <div class="align-left">
+                <a class="navbar-brand" href="#">基于知识图谱的法律问答系统</a>
+            </div>
 
-      <!-- 导航入口 -->
-      <div>
-        <ul class="navbar-nav">
-          <!-- 条目 -->
-          <li class="nav-item">
-            <a class="nav-link" href="/admin/return_main">返回</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+            <!-- 导航入口 -->
+            <div>
+                <ul class="navbar-nav">
+                    <!-- 条目 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/return_main">返回</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <div class="container" style="margin-top: -1px;"> <!-- 修改此处的margin-top值 -->
         <div class="shu">
@@ -53,17 +62,20 @@
                         <option value="12">行政</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 20px;">
                     <label>问题</label>
                     <input type="text" class="form-control" name="origin" placeholder="问题">
                 </div>
-                <button type="button" class="btn btn-primary" onclick="get_matched_questions()">查找匹配问题</button>
+                <button type="button" class="btn btn-primary" onclick="get_matched_questions()"
+                    style="margin-top: 10px;">查找匹配问题</button>
             </form>
             <div id="matched-questions" style="margin-top: 20px;"></div>
             <form id="answerForm">
                 <div class="form-group">
                     <label>专业解答</label>
-                    <textarea type="text" class="form-control" name="destination" placeholder="专业解答" readonly></textarea>
+                    <textarea type="text" class="form-control" name="destination" placeholder="专业解答" readonly
+                        rows="3"></textarea>
+
                 </div>
             </form>
         </div>
@@ -103,6 +115,7 @@
         }
 
         function get_answer(question) {
+            $("textarea[name=destination]").attr("rows", 3);
             var formData = {
                 "module": $("#module").val(),
                 "question": question
@@ -115,7 +128,10 @@
                 dataType: "json",
                 success: function (data) {
                     if (data.status === "success") {
-                        $("textarea[name=destination]").val(data.answer);
+                        var answer = data.answer;
+                        $("textarea[name=destination]").val(answer);
+                        var rows = Math.round($("textarea[name=destination]")[0].scrollHeight / 20);
+                        $("textarea[name=destination]").attr("rows", rows);
                     } else {
                         alert(data.message);
                     }
@@ -126,7 +142,10 @@
                 }
             });
         }
+
+
+
     </script>
 </body>
-</html>
 
+</html>
