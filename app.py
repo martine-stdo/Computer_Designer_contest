@@ -243,7 +243,7 @@ def function3():
 def function4():
     if request.method == 'GET':
         if check_cookies(request):
-            return render_template('data_visual.html')
+            return render_template('function5.html')
         else:
             return render_template('login.html')
     else:
@@ -260,4 +260,4 @@ def index():
         return render_template('error.html')
     
 if __name__ == '__main__':
-    app.run(port=8000, debug=True)
+    app.run(port=5000, debug=True)

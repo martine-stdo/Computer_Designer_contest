@@ -1,0 +1,390 @@
+         body {
+             margin: 0;
+         }
+
+         .header {
+             color: #b0b0b0;
+             background-color: #212529;
+             height: 65px;
+         }
+
+         .container {
+             width: 1200px;
+             margin: 0 auto;
+         }
+
+         .header .showTime {
+             position: absolute;
+             top: 30px;
+             left: 50%;
+             transform: translateX(-50%);
+             line-height: 0.9375rem;
+             font-size: 20px;
+             color: rgba(255, 255, 255, 0.7);
+         }
+
+
+         .header .menu {
+             float: left;
+             color: white;
+             margin-top: 10px;
+
+         }
+
+         .menu a {
+            text-indent: -80px;
+        }
+        
+
+         .header .account1 {
+             float: right;
+             color: white;
+             height: 50px;
+             margin-top: 10px;
+             margin-right: -90px;
+
+         }
+
+         .header a {
+             color: rgb(255, 255, 255);
+             line-height: 50px;
+             display: inline-block;
+             font-size: 18px;
+             padding-right: 20px;
+             padding-right: 20px;
+         }
+
+         .header a:hover {
+             color: rgb(200, 200, 200);
+             text-decoration: none;
+         }
+
+         .text {
+             color: white;
+             font-size: 90px;
+             padding-top: 160px;
+             text-align: center;
+         }
+
+         .text2 {
+             color: white;
+             text-align: center;
+             line-height: 300px;
+         }
+
+         .text3 {
+             color: white;
+             font-size: 35px;
+             margin-top: 30px;
+             text-align: center;
+         }
+
+         .text2 a {
+             text-decoration: none;
+         }
+
+         .text2 a:hover {
+             color: gray;
+         }
+
+         .c {
+             color: white;
+             font-size: 35px;
+             text-align: center;
+             border: 2px solid white;
+             border-radius: 10px;
+         }
+
+         .d {
+             margin-top: 50px;
+             padding-top: 50px;
+             background-color: #696969;
+             width: 400px;
+             height: 500px;
+             border-radius: 20px;
+             margin: 0 auto;
+             color: white;
+             line-width: 300px;
+         }
+
+         .d .user {
+             width: 200px;
+             height: 60px;
+             border: 1px solid black;
+             margin: 0 auto;
+         }
+
+         .account2 {
+             width: 400px;
+             border: 1px solid #dddddd;
+             border-radius: 10px;
+             box-shadow: 5px 5px 5px black;
+             margin-left: auto;
+             margin-right: auto;
+
+             background-color: white;
+             padding: 20px 50px;
+         }
+
+         .acc1 {
+             height: 400px;
+             margin-top: 120px;
+         }
+
+         .acc2 {
+             height: 450px;
+             margin-top: 100px;
+         }
+
+         .account2 h2 {
+             text-align: center;
+             margin-top: 20px;
+         }
+
+         img {
+             width: 100%;
+             height: 100%;
+         }
+
+         .container1 {
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             height: 100vh;
+         }
+
+         .container1 div {
+             color: white;
+             font-size: 20px;
+         }
+
+         .img1,
+         .img2,
+         .img3,
+         .img4 {
+             width: 355px;
+             height: 220px;
+             margin: 0 40px;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+         }
+
+         .back {
+             font-size: 15px;
+         }
+
+         #title {
+             position: absolute;
+             width: 40%;
+             height: 10%;
+             left: 30%;
+             top: 0;
+             color: white;
+             font-size: 40px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+         }
+
+
+         #c1 {
+             position: absolute;
+             top: 7%;
+             width: 40%;
+             height: 25%;
+             left: 30%;
+             color: white;
+             background: #100C2A;
+         }
+
+         #c2 {
+             position: absolute;
+             width: 40%;
+             height: 68%;
+             top: 32%;
+             left: 30%;
+             background: #888888;
+         }
+
+         #r1 {
+             position: absolute;
+             width: 30%;
+             height: 42%;
+             top: 7%;
+             right: 0;
+             background: #888888;
+         }
+
+         #r2 {
+             position: absolute;
+             width: 30%;
+             height: 51%;
+             top: 49%;
+             right: 0;
+             background: #888888;
+         }
+
+         #l1 {
+             position: absolute;
+             width: 30%;
+             height: 42%;
+             top: 7%;
+             left: 0;
+             background: #888888;
+         }
+
+         #l2 {
+             position: absolute;
+             width: 30%;
+             height: 51%;
+             top: 49%;
+             left: 0;
+             background: #888888;
+         }
+
+         .num {
+             width: 25%;
+             float: left;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             color: gold;
+             font-size: 20px;
+         }
+
+         .txt {
+             width: 25%;
+             float: left;
+             font-family: "幼圆";
+             display: flex;
+             align-items: center;
+             justify-content: center;
+         }
+
+         .txt h2 {
+             margin: 0;
+         }
+
+
+         #f5r {
+             position: absolute;
+             width: 50%;
+             height: 70%;
+             top: 10%;
+             right: 0;
+             background: #888888;
+         }
+
+         #f5l {
+             position: absolute;
+             width: 50%;
+             height: 93%;
+             top: 10%;
+             left: 0;
+             background: #888888;
+         }
+
+         #f5c {
+             position: fixed;
+             bottom: 0;
+             right: 0;
+             width: 50%;
+             height: 23%;
+             background-color: #180c2c;
+             overflow: hidden;
+         }
+
+         #scroll-container {
+             position: fixed;
+             bottom: 0;
+             right: 0;
+             width: 50%;
+             height: 23%;
+             overflow: hidden;
+             background-color: #180c2c;
+             border: 1px solid #ccc;
+         }
+         #scroll-container {
+            color: #fff;
+        }
+        
+
+         .my-text {
+             font-size: 20px;
+             color: blue;
+         }
+
+
+
+
+         .introduce {
+             height: 450px;
+             width: 700px;
+             float: left;
+             margin-top: 60px;
+             background-color: #888888;
+         }
+
+
+         .shu {
+             position: absolute;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             float: none;
+             width: 300px;
+             height: 200px;
+             margin: auto;
+         }
+
+         .tis {
+             position: absolute;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+         }
+
+         #containers {
+             width: 400px;
+             height: 400px;
+             margin: 0 auto;
+             background-color: white;
+         }
+
+
+         #f2_1 {
+             position: absolute;
+             width: 30%;
+             height: 65%;
+             top: 18%;
+             left: 4%;
+             background: #888888;
+         }
+
+         #f2_2 {
+             position: absolute;
+             width: 30%;
+             height: 65%;
+             top: 18%;
+             left: 35%;
+             background: #888888;
+         }
+
+         #f2_3 {
+             position: absolute;
+             width: 30%;
+             height: 65%;
+             top: 18%;
+             left: 66%;
+             background: #888888;
+         }
+
+         #container2 {
+             position: absolute;
+             width: 65%;
+             height: 93%;
+             top: 7%;
+             left: 0;
+             background: #888888;
+         }

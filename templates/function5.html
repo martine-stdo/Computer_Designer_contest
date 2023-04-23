@@ -1,40 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>地区疫情等级</title>
+    <title>数据库展示</title>
+    <link rel="icon" href="/static/css/favicon.ico">
+
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <link rel="stylesheet" href="../static/css/demo.css">
-    <link rel="stylesheet" href="../static/plugins/bootstrap-3.4.1/css/bootstrap.css">
-    <script src="../static/js/jquery-1.11.1.min.js"></script>
-    <script src="../static/js/echarts.min.js"></script>
-    <script src="../static/js/china.js"></script>
+    <link rel="stylesheet" href="/static/css/f5.css">
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+    <script src="/static/js/jquery-1.11.1.min.js"></script>
+    <script src="/static/js/echarts.min.js"></script>
+    <script src="/static/js/china.js"></script>
 </head>
-<body background="../static/images/6.jpg"
-      style="background-repeat:no-repeat;
+
+<body background="/static/images/6.jpg" style="background-repeat:no-repeat;
             background-attachment:fixed;
             background-size:100% 100%;">
     <div class="header">
         <div class="container">
             <div class="menu">
-                <a href="/function/menu">大数据物流路径选择系统 / 各地区疫情等级</a>
+                <a href="/function/function4">基于知识图谱的法律问答系统/数据展示</a>
             </div>
-            <div id="tim">我是时间</div>
+            <!-- <div id="showTime">我是时间</div> -->
+            <div class="showTime">当前时间：2023年4月17-0时54分14秒</div>
+            <script>
+                // 第一个网页的定时器脚本
+
+                var t = null;
+                t = setTimeout(time, 1000); //開始运行
+                function time() {
+                    clearTimeout(t); //清除定时器
+                    dt = new Date();
+                    var y = dt.getFullYear();
+                    var mt = dt.getMonth() + 1;
+                    var day = dt.getDate();
+                    var h = dt.getHours(); //获取时
+                    var m = dt.getMinutes(); //获取分
+                    var s = dt.getSeconds(); //获取秒
+                    document.querySelector(".showTime").innerHTML =
+                        "当前时间：" +
+                        y +
+                        "年" +
+                        mt +
+                        "月" +
+                        day +
+                        "-" +
+                        h +
+                        "时" +
+                        m +
+                        "分" +
+                        s +
+                        "秒";
+                    t = setTimeout(time, 1000); //设定定时器，循环运行
+                }
+            </script>
             <div class="account1">
-                    <a>登录成功</a>
-                    <a href="/">退出</a>
-                    <a href="/function/help">帮助与反馈</a>
+                <a href="/admin/return_main">返回</a>
+                <a href="/contactme">帮助与反馈</a>
             </div>
             <div style="clear: both"></div>
         </div>
     </div>
     <div class="container">
-        <h6 class="text3">各地区疫情等级</h6>
+        <h6 class="text3">数据库展示</h6>
     </div>
     <div id="f5l">左边</div>
     <div id="f5r">右边</div>
+    <div id="scroll-container">
+        <!-- 这里将添加文本数据 -->
+    </div>
+
+
+    <script src="../static/js/f5_center.js"></script>
     <script src="../static/js/f5_right.js"></script>
     <script src="../static/js/f5_left.js"></script>
-    <script src="../static/js/controller.js"></script>
+    <!-- <script src="../static/js/controller.js"></script> -->
 </body>
+
 </html>
