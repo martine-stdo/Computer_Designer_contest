@@ -1,329 +1,341 @@
-         body{
-            margin:0;
+         body {
+             margin: 0;
          }
 
-         .header{
-             color:#b0b0b0;
-             background-color:#333;
-             height:50px;
+         .header {
+             color: #b0b0b0;
+             background-color: #333;
+             height: 50px;
          }
 
-         .container{
-              width:1200px;
-              margin:0 auto;
+         .container {
+             width: 1200px;
+             margin: 0 auto;
          }
 
-         .header .menu{
-             float:left;
-             color:white;
-         }
-         .header .account1{
-             float:right;
-             color:white;
-             height:50px;
-         }
-         .header a{
-            color:#b0b0b0;
-            line-height:50px;
-            display:inline-block;
-            font-size:18px;
-            padding-right:20px;
-            padding-right:20px;
-            text-decoration:none;
+         .header .menu {
+             float: left;
+             color: white;
          }
 
-         .header a:hover{
-            color:white;
+         .header .account1 {
+             float: right;
+             color: white;
+             height: 50px;
          }
 
-         .text{
-            color:white;
-            font-size:90px;
-            padding-top:160px;
-            text-align:center;
-        }
-        .text2{
-            color:white;
-            text-align:center;
-            line-height:300px;
-        }
-        .text3{
-            color:white;
-            font-size:35px;
-            margin-top:30px;
-        }
+         .header a {
+             color: #b0b0b0;
+             line-height: 50px;
+             display: inline-block;
+             font-size: 18px;
+             padding-right: 20px;
+             padding-right: 20px;
+             text-decoration: none;
+         }
 
-        .text2 a{
-            text-decoration:none;
-        }
-        .text2 a:hover{
-            color:gray;
-        }
+         .header a:hover {
+             color: white;
+         }
 
-        .c{
-            color:white;
-            font-size:35px;
-            text-align:center;
-            border:2px solid white;
-            border-radius:10px;
-        }
-        .d{
-            margin-top:50px;
-            padding-top:50px;
-            background-color:#696969;
-            width:400px;
-            height:500px;
-            border-radius:20px;
-            margin:0 auto;
-            color:white;
-            line-width:300px:
+         .text {
+             color: white;
+             font-size: 90px;
+             padding-top: 160px;
+             text-align: center;
+         }
 
-        }
-        .d .user{
-            width:200px;
-            height:60px;
-            border:1px solid black;
-            margin:0 auto;
-        }
-        .account2{
-            width:400px;
-            border:1px solid #dddddd;
-            border-radius:10px;
-            box-shadow:5px 5px 5px black;
-            margin-left:auto;
-            margin-right:auto;
+         .text2 {
+             color: white;
+             text-align: center;
+             line-height: 300px;
+         }
 
-            background-color:white;
-            padding:20px 50px;
-        }
-        .acc1{
-            height:400px;
-            margin-top:120px;
-        }
-        .acc2{
-            height:450px;
-            margin-top:100px;
-        }
+         .text3 {
+             color: white;
+             font-size: 35px;
+             margin-top: 30px;
+         }
 
-        .account2 h2{
-            text-align:center;
-            margin-top:20px;
-        }
+         .text2 a {
+             text-decoration: none;
+         }
 
-        img{
-            width:100%;
-            height:100%;
-        }
-        .container1 {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
-        }
+         .text2 a:hover {
+             color: gray;
+         }
 
-        .container1 div {
-          color: white;
-          font-size: 20px;
-        }
+         .c {
+             color: white;
+             font-size: 35px;
+             text-align: center;
+             border: 2px solid white;
+             border-radius: 10px;
+         }
 
-        .img1,
-        .img2,
-        .img3,
-        .img4 {
-          width: 355px;
-          height: 220px;
-          margin: 0 40px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        .back{
-            font-size:15px;
-        }
+         .d {
+             margin-top: 50px;
+             padding-top: 50px;
+             background-color: #696969;
+             width: 400px;
+             height: 500px;
+             border-radius: 20px;
+             margin: 0 auto;
+             color: white;
+             line-width: 300px:
+         }
 
-        #title{
-            position: absolute;
-            width: 40%;
-            height: 10%;
-            left: 30%;
-            top: 0;
-            color: white;
-            font-size: 40px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-        }
+         .d .user {
+             width: 200px;
+             height: 60px;
+             border: 1px solid black;
+             margin: 0 auto;
+         }
 
-        #tim{
-            position: absolute;
-            margin:0 auto;
-            left: 46%;
-            top: 2%;
-            color: #FFFFFF;
-            font-size: 16px;
-        }
+         .account2 {
+             width: 400px;
+             border: 1px solid #dddddd;
+             border-radius: 10px;
+             box-shadow: 5px 5px 5px black;
+             margin-left: auto;
+             margin-right: auto;
 
-        #c1 {
-            position: absolute;
-            top: 7%;
-            width: 40%;
-            height: 25%;
-            left: 30%;
-            color:white;
-            background: #100C2A;
-        }
-        #c2 {
-            position: absolute;
-            width: 40%;
-            height: 68%;
-            top: 32%;
-            left: 30%;
-            background: #888888;
-        }
+             background-color: white;
+             padding: 20px 50px;
+         }
 
-        #r1 {
-            position: absolute;
-            width: 30%;
-            height: 42%;
-            top:7%;
-            right: 0;
-            background: #888888;
-        }
+         .acc1 {
+             height: 400px;
+             margin-top: 120px;
+         }
 
-        #r2 {
-            position: absolute;
-            width: 30%;
-            height: 51%;
-            top:49%;
-            right: 0;
-            background: #888888;
-        }
+         .acc2 {
+             height: 450px;
+             margin-top: 100px;
+         }
 
-        #l1 {
-            position: absolute;
-            width: 30%;
-            height: 42%;
-            top:7%;
-            left: 0;
-            background: #888888;
-        }
-        #l2 {
-            position: absolute;
-            width: 30%;
-            height: 51%;
-            top:49%;
-            left: 0;
-            background: #888888;
-        }
+         .account2 h2 {
+             text-align: center;
+             margin-top: 20px;
+         }
 
-        .num{
-            width:25%;
-            float:left;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            color:gold;
-            font-size:20px;
-        }
+         img {
+             width: 100%;
+             height: 100%;
+         }
 
-        .txt{
-            width:25%;
-            float:left;
-            font-family:"幼圆";
-            display:flex;
-            align-items:center;
-            justify-content:center;
-        }
+         .container1 {
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             height: 100vh;
+         }
 
-        .txt h2{
-            margin:0;
-        }
+         .container1 div {
+             color: white;
+             font-size: 20px;
+         }
 
-        #f5r {
-            position: absolute;
-            width: 50%;
-            height: 93%;
-            top:7%;
-            right:0;
-            background: #888888;
-        }
+         .img1,
+         .img2,
+         .img3,
+         .img4 {
+             width: 355px;
+             height: 220px;
+             margin: 0 40px;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+         }
 
-        #f5l {
-            position: absolute;
-            width: 50%;
-            height: 93%;
-            top:7%;
-            left:0;
-            background: #888888;
-        }
+         .back {
+             font-size: 15px;
+         }
 
-        .introduce{
-            height:450px;
-            width:700px;
-            float:left;
-            margin-top:60px;
-            background-color:#888888;
-        }
+         #title {
+             position: absolute;
+             width: 40%;
+             height: 10%;
+             left: 30%;
+             top: 0;
+             color: white;
+             font-size: 40px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+         }
 
-        .shu {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          float: none;
-          width: 300px;
-          height: 200px;
-          margin: auto;
-        }
+         #tim {
+             position: absolute;
+             margin: 0 auto;
+             left: 46%;
+             top: 2%;
+             color: #FFFFFF;
+             font-size: 16px;
+         }
 
-        .tis {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
-        #containers{
-            width:400px;
-            height:400px;
-            margin:0 auto;
-            background-color:white;
-        }
+         #c1 {
+             position: absolute;
+             top: 7%;
+             width: 40%;
+             height: 25%;
+             left: 30%;
+             color: white;
+             background: #100C2A;
+         }
 
+         #c2 {
+             position: absolute;
+             width: 40%;
+             height: 68%;
+             top: 32%;
+             left: 30%;
+             background: #888888;
+         }
 
-        #f2_1{
-            position: absolute;
-            width: 30%;
-            height: 65%;
-            top:18%;
-            left: 4%;
-            background: #888888;
-        }
-        #f2_2{
-            position: absolute;
-            width: 30%;
-            height: 65%;
-            top:18%;
-            left:35%;
-            background: #888888;
-        }
-        #f2_3{
-            position: absolute;
-            width: 30%;
-            height: 65%;
-            top:18%;
-            left:66%;
-            background: #888888;
-        }
-        #container2{
-            position: absolute;
-            width: 65%;
-            height: 93%;
-            top:7%;
-            left: 0;
-            background: #888888;
-        }
+         #r1 {
+             position: absolute;
+             width: 30%;
+             height: 42%;
+             top: 7%;
+             right: 0;
+             background: #888888;
+         }
+
+         #r2 {
+             position: absolute;
+             width: 30%;
+             height: 51%;
+             top: 49%;
+             right: 0;
+             background: #888888;
+         }
+
+         #l1 {
+             position: absolute;
+             width: 30%;
+             height: 42%;
+             top: 7%;
+             left: 0;
+             background: #888888;
+         }
+
+         #l2 {
+             position: absolute;
+             width: 30%;
+             height: 51%;
+             top: 49%;
+             left: 0;
+             background: #888888;
+         }
+
+         .num {
+             width: 25%;
+             float: left;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             color: gold;
+             font-size: 20px;
+         }
+
+         .txt {
+             width: 25%;
+             float: left;
+             font-family: "幼圆";
+             display: flex;
+             align-items: center;
+             justify-content: center;
+         }
+
+         .txt h2 {
+             margin: 0;
+         }
+
+         #f5r {
+             position: absolute;
+             width: 50%;
+             height: 93%;
+             top: 7%;
+             right: 0;
+             background: #888888;
+         }
+
+         #f5l {
+             position: absolute;
+             width: 50%;
+             height: 93%;
+             top: 7%;
+             left: 0;
+             background: #888888;
+         }
+
+         .introduce {
+             height: 450px;
+             width: 700px;
+             float: left;
+             margin-top: 60px;
+             background-color: #888888;
+         }
+
+         .shu {
+             position: absolute;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             float: none;
+             width: 300px;
+             height: 200px;
+             margin: auto;
+         }
+
+         .tis {
+             position: absolute;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+         }
+
+         #containers {
+             width: 400px;
+             height: 400px;
+             margin: 0 auto;
+             background-color: white;
+         }
 
 
+         #f2_1 {
+             position: absolute;
+             width: 30%;
+             height: 65%;
+             top: 18%;
+             left: 4%;
+             background: #888888;
+         }
 
+         #f2_2 {
+             position: absolute;
+             width: 30%;
+             height: 65%;
+             top: 18%;
+             left: 35%;
+             background: #888888;
+         }
 
+         #f2_3 {
+             position: absolute;
+             width: 30%;
+             height: 65%;
+             top: 18%;
+             left: 66%;
+             background: #888888;
+         }
 
+         #container2 {
+             position: absolute;
+             width: 65%;
+             height: 93%;
+             top: 7%;
+             left: 0;
+             background: #888888;
+         }

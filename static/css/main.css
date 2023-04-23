@@ -125,4 +125,8 @@ a > div {
     margin-right: 10px;
   }
   
+  .mr-auto {
+    margin-left: -50px;
+  }
+  
 

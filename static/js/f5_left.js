@@ -29,7 +29,7 @@ var f5_left_option = {
   },
   series: [
     {
-      name: 'Access From',
+      name: '主体',
       type: 'pie',
       selectedMode: 'single',
       radius: [0, '30%'],
@@ -47,7 +47,7 @@ var f5_left_option = {
       ]
     },
     {
-      name: 'Access From',
+      name: '类别',
       type: 'pie',
       radius: ['45%', '60%'],
       labelLine: {

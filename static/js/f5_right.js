@@ -3,7 +3,7 @@ var f5_right = echarts.init(document.getElementById('f5r'), "dark");
 var f5_right_option = {
   title: {
     text: '数据折线柱状图',
-    subtext: 'Fake Data',
+    subtext: '',
     left: 'left'
   },
   tooltip: {
@@ -24,7 +24,7 @@ var f5_right_option = {
     }
   },
   legend: {
-    data: ['Amount', 'Precipitation', 'Proportion']
+    data: ['总和', 'Precipitation', '比例']
   },
   xAxis: [
     {
@@ -49,7 +49,7 @@ var f5_right_option = {
   yAxis: [
     {
       type: 'value',
-      name: 'Precipitation',
+      name: '数目',
       min: 0,
       max: 1500,
       interval:75,
@@ -59,7 +59,7 @@ var f5_right_option = {
     },
     {
       type: 'value',
-      name: 'Temperature',
+      name: '占比',
       min: 0,
       max: 100,
       interval: 5,
@@ -70,7 +70,7 @@ var f5_right_option = {
   ],
   series: [
     {
-      name: 'Amount',
+      name: '总和',
       type: 'bar',
       tooltip: {
         valueFormatter: function (value) {
@@ -82,7 +82,7 @@ var f5_right_option = {
       ]
     },
     {
-      name: 'Proportion',
+      name: '比例',
       type: 'line',
       yAxisIndex: 1,
       tooltip: {
