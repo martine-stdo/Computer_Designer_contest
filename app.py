@@ -249,8 +249,8 @@ def function4():
     else:
         return render_template('error.html')
 
-@app.route('/', methods=['GET'])
-def index():
+@app.route('/admin/menu/', methods=['GET'])
+def main_menu():
     if request.method == 'GET':
         if check_cookies(request):
             return render_template('menu.html')
@@ -258,6 +258,14 @@ def index():
             return render_template('login.html')
     else:
         return render_template('error.html')
-    
+
+@app.route('/', methods=['GET'])
+def index():
+    if request.method == 'GET':
+            return render_template('loading.html')
+    else:
+        return render_template('error.html')
+
+
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

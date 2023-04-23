@@ -25,7 +25,7 @@ function submitForm(event) {
         setCookie('my_cookie', result.cookie, 7);
 
       // 跳转到主页
-      window.location.href = '/';
+      window.location.href = '/admin/menu/';
     } else {
       // 显示错误信息
       alert("用户不存在或密码错误");
