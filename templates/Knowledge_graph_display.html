@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="icon" href="/static/css/favicon.ico">
     <meta charset="UTF-8">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neo4j Graph Visualization</title>
     <style>
@@ -35,31 +36,55 @@
 
         // 将图谱数据转换为vis.js兼容的格式
         function prepareDataForVis(records) {
-    const nodeMap = new Map();
-    const edgeMap = new Map();
+            const nodeMap = new Map();
+            const edgeMap = new Map();
 
-    records.forEach(record => {
-        const path = record.get('p');
-        const segments = path.segments;
+            records.forEach(record => {
+                const path = record.get('p');
+                const segments = path.segments;
 
-        segments.forEach(segment => {
-            const n = segment.start;
-            const m = segment.end;
-            const r = segment.relationship;
+                segments.forEach(segment => {
+                    const n = segment.start;
+                    const m = segment.end;
+                    const r = segment.relationship;
 
-            nodeMap.set(n.identity.toString(), { id: n.identity.toString(), label: n.properties.name });
-            nodeMap.set(m.identity.toString(), { id: m.identity.toString(), label: m.properties.name });
+                    nodeMap.set(n.identity.toString(), { id: n.identity.toString(), label: n.properties.name });
+                    nodeMap.set(m.identity.toString(), { id: m.identity.toString(), label: m.properties.name });
 
-            const edgeId = `${n.identity.toString()}-${m.identity.toString()}`;
-            edgeMap.set(edgeId, { from: n.identity.toString(), to: m.identity.toString(), label: r.type });
-        });
-    });
+                    const edgeId = `${n.identity.toString()}-${m.identity.toString()}`;
+                    edgeMap.set(edgeId, { from: n.identity.toString(), to: m.identity.toString(), label: r.type });
+                });
+            });
 
-    const nodes = Array.from(nodeMap.values());
-    const edges = Array.from(edgeMap.values());
+            const nodes = Array.from(nodeMap.values());
+            const edges = Array.from(edgeMap.values());
 
-    return { nodes: new vis.DataSet(nodes), edges: new vis.DataSet(edges) };
-}
+            return { nodes: new vis.DataSet(nodes), edges: new vis.DataSet(edges) };
+        }
+
+        async function getAnswerNode(questionNodeId) {
+            const session = neo4jDriver.session();
+            try {
+                const queryString = `MATCH (q)-[:专业回答]->(a) WHERE id(q) = toInteger(${questionNodeId}) RETURN aMATCH p=(n:模块)-[*1..3]->(m:回答) WHERE n.name = '商标'RETURN DISTINCT m, p`;
+                const result = await session.run(queryString);
+                if (result.records.length > 0) {
+                    return result.records[0].get('a');
+                } else {
+                    return null;
+                }
+            } finally {
+                session.close();
+            }
+        }
+
+        function addAnswerNodeToGraph(answerNode, questionNodeId, nodes, edges) {
+            const answerNodeId = answerNode.identity.toString();
+            if (!nodes.get(answerNodeId)) {
+                nodes.add({ id: answerNodeId, label: answerNode.properties.name }); // 更改属性名为name
+                edges.add({ from: questionNodeId, to: answerNodeId, label: '专业回答' }); // 更改关系名为专业回答
+            }
+        }
+
 
 
         // 渲染关系图谱
@@ -72,57 +97,71 @@
 
             const options = {
                 nodes: {
-        shape: 'dot',
-        size: 20,
-        font: {
-            size: 14,
-            color: '#FFFFFF' // 更改字体颜色为白色
-        },
-        borderWidth: 2,
-        color: {
-            border: '#222222', // 更改边框颜色为深灰色
-            background: '#5A9', // 更改背景颜色为科技绿色
-            highlight: {
-                border: '#999999', // 更改高亮边框颜色为浅灰色
-                background: '#A5F' // 更改高亮背景颜色为科技紫色
-            }
-        }
-    },
+                    shape: 'dot',
+                    size: 20,
+                    font: {
+                        size: 14,
+                        color: '#FFFFFF' // 更改字体颜色为白色
+                    },
+                    borderWidth: 2,
+                    color: {
+                        border: '#222222', // 更改边框颜色为深灰色
+                        background: '#5A9', // 更改背景颜色为科技绿色
+                        highlight: {
+                            border: '#999999', // 更改高亮边框颜色为浅灰色
+                            background: '#A5F' // 更改高亮背景颜色为科技紫色
+                        }
+                    }
+                },
 
-    edges: {
-        width: 2,
-        color: {
-            color: '#BBBBBB', // 更改边颜色为浅灰色
-            highlight: '#A5F' // 更改高亮边颜色为科技紫色
-        },
-        arrows: {
-            to: {
-                enabled: true,
-                scaleFactor: 0.5
-            }
-        }
-    },
-    physics: {
-    stabilization: {
-        enabled: true,
-        iterations: 1000,
-        updateInterval: 100,
-        onlyDynamicEdges: false,
-        fit: true
-    },
-    barnesHut: {
-        gravitationalConstant: -2000,
-        centralGravity: 0.3,
-        springLength: 95,
-        springConstant: 0.04,
-        damping: 0.15, // 将damping值从0.09提高到0.15
-        avoidOverlap: 0.1
-        }
-    }
-};
+                edges: {
+                    width: 2,
+                    color: {
+                        color: '#BBBBBB', // 更改边颜色为浅灰色
+                        highlight: '#A5F' // 更改高亮边颜色为科技紫色
+                    },
+                    arrows: {
+                        to: {
+                            enabled: true,
+                            scaleFactor: 0.5
+                        }
+                    }
+                },
+                physics: {
+                    stabilization: {
+                        enabled: true,
+                        iterations: 1000,
+                        updateInterval: 100,
+                        onlyDynamicEdges: false,
+                        fit: true
+                    },
+                    barnesHut: {
+                        gravitationalConstant: -2000,
+                        centralGravity: 0.3,
+                        springLength: 95,
+                        springConstant: 0.04,
+                        damping: 0.15, // 将damping值从0.09提高到0.15
+                        avoidOverlap: 0.1
+                    }
+                }
+            };
 
 
             const network = new vis.Network(graphContainer, { nodes, edges }, options);
+            network.on('click', async (params) => {
+                const nodeId = params.nodes[0];
+                if (nodeId) {
+                    const node = nodes.get(nodeId);
+                    if (node && node.label.startsWith('Q:')) { // 检查节点是否是问题节点
+                        const answerNode = await getAnswerNode(nodeId);
+                        if (answerNode) {
+                            addAnswerNodeToGraph(answerNode, nodeId, nodes, edges);
+                        }
+                    }
+                }
+            });
+
+
         }
 
         // 在页面加载时调用renderGraph
@@ -140,6 +179,7 @@
     </script>
 
 </head>
+
 <body>
     <div>
         <label for="module-select">选择模块：</label>
@@ -159,7 +199,8 @@
         </select>
         <button id="load-module">加载模块</button>
     </div>
-    
+
     <div id="graph"></div>
 </body>
+
 </html>

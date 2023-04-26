@@ -175,6 +175,33 @@
           return { nodes: new vis.DataSet(nodes), edges: new vis.DataSet(edges) };
         }
 
+        // 将新的节点添加到前端页面中
+        function addNodesToFrontEnd(relatedNodes, nodes) {
+          relatedNodes.forEach(relatedNode => {
+            if (!nodes.get(relatedNode.id)) {
+              nodes.add(relatedNode);
+            }
+          });
+        }
+
+        // 获取与被点击节点关系为“专业回答”的节点
+        async function getRelatedNodes(nodeId) {
+          const session = neo4jDriver.session();
+          try {
+            const queryString = `MATCH (n)-[:专业回答]->(m) WHERE id(n) = ${nodeId} RETURN m`;
+            const result = await session.run(queryString);
+            return result.records.map(record => {
+              const node = record.get('m');
+              return {
+                id: node.identity.toString(),
+                label: node.properties.name,
+              };
+            });
+          } finally {
+            session.close();
+          }
+        }
+
 
         // 渲染关系图谱
         async function renderGraph(moduleName) {
@@ -236,7 +263,38 @@
           };
 
 
+          // 初始化网络
           const network = new vis.Network(graphContainer, { nodes, edges }, options);
+
+          // 添加节点点击事件监听器
+          network.on('click', async function (params) {
+
+            if (params.nodes.length > 0) {
+              const nodeId = params.nodes[0];
+              const relatedNodes = await getRelatedNodes(nodeId);
+
+              // 创建已经存在的边缘的集合
+              const existingEdges = new Set();
+              edges.forEach(edge => {
+                existingEdges.add(`${edge.from}-${edge.to}`);
+              });
+
+              // 添加新的边连接被点击的节点与新添加的节点，并检查边是否已存在
+              relatedNodes.forEach(relatedNode => {
+                addNodesToFrontEnd([relatedNode], nodes);
+
+                const edgeId = `${nodeId}-${relatedNode.id}`;
+                if (!existingEdges.has(edgeId)) {
+                  edges.add({
+                    from: nodeId,
+                    to: relatedNode.id,
+                    label: '专业回答',
+                  });
+                }
+              });
+            }
+          });
+
         }
 
         // 在页面加载时调用renderGraph
