@@ -12,6 +12,26 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 	<style>
+		.text-center {
+			text-align: center;
+		}
+
+		footer {
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+			font-size: xx-large;
+			color: #ffffff;
+		}
+
+		.footer-text {
+			font-size: 16px;
+			color: #ffffff;
+		}
+
+
+
+
 		.body_background {
 			background-image: url('{{ url_for("static", filename="images/Yangtze.jpg") }}');
 			background-position: center;
@@ -152,19 +172,22 @@
 			<h1 class="header" style="color:white; size: 80px">
 				<sup>
 					<a href="https://www.whpu.edu.cn/">
-						<img src="/static/school_logo/square.png" alt="WHPU" class="logo" style="width: 330px; height: 97px;">
-					  </a>
+						<img src="/static/school_logo/square.png" alt="WHPU" class="logo"
+							style="width: 330px; height: 97px;">
+					</a>
 		</div>
 		</sup>
 		</h1>
 		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-11 login_div">
 			<h3 style="padding-top: 20px;">基于知识图谱的法律问答系统</h3>
-            <h4>开发人员</h4>
+			<h4>开发人员</h4>
 			<div class="form-group">
-				<p>大数据2019级学生吴日升</p>
-				<p>大数据2020级学生蒋俊涛</p>
-				<p>大数据2019级学生邵乾鸽</p>
-				<h5>指导老师陈松楠</h5>
+				<p>大数据2019级学生 吴日升</p>
+				<p>大数据2020级学生 蒋俊涛</p>
+				<p>大数据2020级学生 邵乾鸽</p>
+				<h5>指导老师 陈松楠</h5>
+				<p></p>
+				<p></p>
 			</div>
 			<button id="login_button" class="btn btn-primary" onclick="contactme()">联系我们</button>
 			<br>
@@ -172,37 +195,42 @@
 			<p class="lead">
 				你还能通过以下方式联系到我们⬇️
 			</p>
+			<p></p>
+			<br>
+			<a href="http://www.nighterdream.cn" rel="nofollow" href="http://nighterdream.cn" rel="nofollow"><img
+					src="https://img.shields.io/badge/%E5%8D%9A%E5%AE%A2-www.nighterdream.cn-blue"
+					alt="博客"
+					data-canonical-src="https://img.shields.io/badge/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2-nighterdream.cn-40c5f1.svg"
+					style="max-width: 100%;"></a>
+			<a rel="nofollow" href="https://space.bilibili.com/33934287?spm_id_from=333.1007.0.0" rel="nofollow"><img
+					src="https://camo.githubusercontent.com/9c5afcc41e679719e7ba6d49c37a0e73545b127c55a4556edace4324f47a7473/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f42696c6942696c692d626c75652e7376673f6c6f676f3d62696c6962696c69266c6f676f436f6c6f723d7768697465"
+					alt="Bilibili"
+					data-canonical-src="https://img.shields.io/badge/BiliBili-blue.svg?logo=bilibili&amp;logoColor=white"
+					style="max-width: 100%;"></a>
+			<a rel="nofollow" href="mailto:chensongnan@whpu.edu.cn"><img
+					src="https://img.shields.io/badge/%E9%82%AE%E7%AE%B1-chensongnan%40whpu.edu.cn-yellow"
+					alt="邮箱"
+					data-canonical-src="https://img.shields.io/badge/%E9%82%AE%E7%AE%B1-chensongnan@whpu.edu.cn-b69118.svg"
+					style="max-width: 100%;"></a>
 		</div>
 
 
 	</center>
 
-	<footer style="display: flex; justify-content: center; align-items: center; position: fixed; bottom: 10px; width: 100%;">
-        <a style="margin: 0 10px;" href="http://nighterdream.cn" rel="nofollow" href="http://nighterdream.cn" rel="nofollow"><img
-                src="https://camo.githubusercontent.com/2d84a91827fe5272aa60911875358e725a9db67d57d1b433561b2a973d63faa0/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2545362538382539312545372539412538342545352538442539412545352541452541322d6e696768746572647265616d2e636e2d3430633566312e737667"
-                alt="博客"
-                data-canonical-src="https://img.shields.io/badge/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2-nighterdream.cn-40c5f1.svg"
-                style="max-width: 100%;"></a>
-        <a style="margin: 0 10px;"rel="nofollow"href="https://space.bilibili.com/33934287?spm_id_from=333.1007.0.0" rel="nofollow"><img
-                src="https://camo.githubusercontent.com/9c5afcc41e679719e7ba6d49c37a0e73545b127c55a4556edace4324f47a7473/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f42696c6942696c692d626c75652e7376673f6c6f676f3d62696c6962696c69266c6f676f436f6c6f723d7768697465"
-                alt="Bilibili"
-                data-canonical-src="https://img.shields.io/badge/BiliBili-blue.svg?logo=bilibili&amp;logoColor=white"
-                style="max-width: 100%;"></a>
-        <a style="margin: 0 10px;" rel="nofollow"href="mailto:nighterdream123@gmail.com"><img
-                src="https://camo.githubusercontent.com/02887598c5d249446fcbdeda40c422e01b322409de8b3caa9c2a1bd288da7f65/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2545392538322541452545372541452542312d6e696768746572647265616d31323340676d61696c2e636f6d2d6236393131382e737667"
-                alt="邮箱"
-                data-canonical-src="https://img.shields.io/badge/%E9%82%AE%E7%AE%B1-nighterdream123@gmail.com-b69118.svg"
-                style="max-width: 100%;"></a>
-    </footer>
 
 	<script>
 		function contactme() {
 			window.location.href = 'http://www.nighterdream.cn';
 		}
 	</script>
-	
+
+	<footer class="py-1 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">武汉轻工大学	数学与计算机学院</p>
+		</div>
+	</footer>
+
+
 </body>
 
 </html>
-
-
