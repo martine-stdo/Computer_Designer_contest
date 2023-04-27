@@ -112,7 +112,7 @@ def return_main():
 def function1():
     if request.method == 'GET':
         if check_cookies(request):
-            return render_template('QandA.html')
+            return render_template('newQandA.html')
         else:
             return render_template('login.html')
     else:
