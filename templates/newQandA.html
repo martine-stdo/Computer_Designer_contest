@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="/static/css/favicon.ico">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>法律问答</title>
+
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-image: url({{ url_for('static', filename='/images/legal_consultant.jpg') }});
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        html {
+            height: 100%;
+            width: 100%;
+            display: block;
+        }
+
+        body {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            border: #aaaaaa;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .all-container {
+            margin-top: 70px;
+            height: 80vh;
+            width: 100vw;
+            min-height: 480px;
+            display: flex;
+            border: #aaaaaa;
+            flex-flow: row;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.95;
+        }
+
+        .left-container {
+            height: inherit;
+            width: 160px;
+            min-width: 100px;
+            max-width: 200px;
+            border-radius: 4px;
+            border: 0.5px solid #D0D0D0;
+            background-color: #EEEEEE;
+            display: flex;
+            flex-flow: column;
+        }
+
+        .chat,
+        .newchat {
+            border-bottom: 0.5px solid #cccccc;
+            border-top: 0.5px solid #cccccc;
+            ;
+            background-color: #EFEFEF;
+            padding: 10px;
+        }
+
+        .newchat {
+            color: #317d8a;
+        }
+
+        .newchat:hover {
+            background-color: #E8E8E8;
+        }
+
+        .chat:hover {
+            background-color: #E8E8E8;
+        }
+
+        .right-container {
+            height: inherit;
+            width: 760px;
+            min-width: 220px;
+            border-radius: 4px;
+            border: 0.5px solid #cccccc;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-flow: column;
+            overflow: hidden;
+        }
+
+        .content {
+            font-size: 15px;
+            width: calc(100% - 40px);
+            padding: 20px;
+            overflow-y: scroll;
+            flex: 1;
+        }
+
+        /* 设置滚动条的样式 */
+        .content::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* 滚动槽 */
+        .content::-webkit-scrollbar-track {
+            border-radius: 8px;
+        }
+
+        /* 滚动条滑块 */
+        .content::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+
+            background: rgba(0, 0, 0, 0);
+        }
+
+        /* 滚动条滑块移入显示 */
+        .content:hover::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .input-area {
+            border-top: 0.5px solid #e0e0e0;
+            height: 100px;
+            display: flex;
+            flex-flow: column;
+            background-color: #fff;
+        }
+
+        textarea {
+            flex: 1;
+            padding: 5px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            overflow-y: auto;
+            overflow-x: hidden;
+            outline: none;
+            resize: none;
+        }
+
+        button {
+            margin-left: 5px;
+            margin-right: 5px;
+            padding: 10px;
+        }
+
+        .button-area {
+            display: flex;
+            min-height: 40px;
+            margin-right: 10px;
+            line-height: 40px;
+            padding: 5px;
+            justify-content: flex-end;
+        }
+
+        .button-area button {
+            max-width: 80px;
+            border: none;
+            outline: none;
+            border-radius: 4px;
+            float: right;
+            cursor: pointer;
+        }
+
+        .button-area #chmod-btn,
+        .button-area #del-btn {
+            max-width: 120px;
+        }
+
+        .button-area button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .button-area button:active {
+            background-color: #bdbdbd;
+        }
+
+        .menu {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0;
+            display: none;
+        }
+
+        .menu button {
+            width: 60px;
+            height: 25px;
+            padding: 2px;
+            font-size: 6px;
+            border: 1px solid #A0A0A0;
+            border-radius: 4px;
+            outline: none;
+            background-color: #fff;
+            cursor: pointer;
+            display: none;
+        }
+
+        .head-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #fafafa;
+            border-bottom: 0.5px solid #e0e0e0;
+        }
+
+        header {
+            background-color: rgb(33, 37, 41);
+            color: #ffffff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+        }
+
+        .nav-container {
+            height: 66px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .title {
+            font-size: 24px;
+        }
+
+        .back-button {
+            background-color: #ffffff;
+            color: #333333;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+
+        .answer-container {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        /* 下拉列表样式 */
+        .form-control {
+            font-size: 16px;
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            background-color: #ffffff;
+            color: #333333;
+            outline: none;
+            cursor: pointer;
+
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdn.staticfile.org/clipboard.js/2.0.4/clipboard.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/a11y-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+    <!-- and it's easy to individually load additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/languages/go.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="title">法律问答</div>
+            <button class="back-button">返回</button>
+        </div>
+    </header>
+    <div class="all-container">
+        <div class="right-container">
+            <div class="head-area">
+                <div class="form-group" style="position: relative;">
+                    <label>选择模块</label>
+                    <select class="form-control" id="module" name="module">
+                        <option value="1">交通</option>
+                        <option value="2">婚姻</option>
+                        <option value="3">债务</option>
+                        <option value="4">公司</option>
+                        <option value="5">刑事</option>
+                        <option value="6">劳动</option>
+                        <option value="7">合同</option>
+                        <option value="8">商标</option>
+                        <option value="9">房产</option>
+                        <option value="10">民商</option>
+                        <option value="11">民法</option>
+                        <option value="12">行政</option>
+                    </select>
+                </div>
+            </div>
+            <div class="content">
+
+            </div>
+            <div class="input-area">
+                <textarea name="text" id="textarea" placeholder="请输入问题"></textarea>
+                <div class="button-area">
+                    <button id="send-btn" class="talk_sub">匹配问题</button>
+                    <button id="send-btn1" class="talk_sub">重选</button>
+                </div>
+            </div>
+        </div>
+</body>
+<script>
+
+    document.querySelector(".back-button").addEventListener("click", function () {
+        window.location.href = "/admin/return_main";
+    });
+    $(document).ready(function () {
+        // 发送问题并获取匹配的问题列表
+        $("#send-btn, #send-btn1").click(function () {
+            var input_question = $("#textarea").val();
+            var module = $("#module").val();
+            if (input_question.trim() === "") {
+                alert("请输入问题");
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/function/get_matched_questions",
+                contentType: "application/json",
+                data: JSON.stringify({ "question": input_question, "module": module }),
+                success: function (response) {
+                    if (response.status === "success") {
+                        $(".content").empty();
+                        var matched_questions = response.matched_questions;
+                        for (var i = 0; i < matched_questions.length; i++) {
+                            $(".content").append(`<p class="question" data-question="${matched_questions[i][0]}">${i + 1}. ${matched_questions[i][0]}</p>`);
+                        }
+
+                        // 点击匹配的问题并获取答案
+                        $(".question").click(function () {
+                            var selected_question = $(this).data("question");
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/function/ask_question",
+                                contentType: "application/json",
+                                data: JSON.stringify({ "question": selected_question, "module": module }),
+                                success: function (response) {
+                                    if (response.status === "success") {
+                                        $(".content").empty();
+                                        $(".content").append(`<p>${response.answer}</p>`);
+                                    } else {
+                                        alert(response.message);
+                                    }
+                                }
+                            });
+                        });
+                    } else {
+                        alert(response.message);
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+</html>
