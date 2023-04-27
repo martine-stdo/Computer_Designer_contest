@@ -10,6 +10,10 @@
 <title>智慧图普</title>
 <link rel="stylesheet" href="\static\css\data_visual.css">
 <style>
+  * {
+    border: none;
+  }
+
   /* 缩小下拉列表和按钮的大小 */
   .form-inline {
     transform: scale(0.4);
@@ -129,6 +133,11 @@
         <button id="load-module" class="btn btn-primary">加载模块</button>
       </div>
       <div id="graph"></div>
+      <div id="info-box"
+        style="display: none; position: absolute; background-color: white; padding: 10px; border: 1px solid black;">
+        <p id="info-text"></p>
+      </div>
+
       <script>
         const { driver, auth } = neo4j;
 
@@ -293,6 +302,35 @@
                 }
               });
             }
+
+            const infoBox = document.getElementById('info-box');
+            const infoText = document.getElementById('info-text');
+
+            if (params.nodes.length > 0) {
+              const nodeId = params.nodes[0];
+              const clickedNode = nodes.get(nodeId);
+
+              if (infoBox.style.display === 'none') {
+                infoText.textContent = clickedNode.label;
+
+                // 计算文本框位置
+                const canvasPos = network.canvasToDOM({ x: params.pointer.canvas.x, y: params.pointer.canvas.y });
+                infoBox.style.left = `${canvasPos.x}px`;
+                infoBox.style.top = `${canvasPos.y}px`;
+
+                // 显示文本框
+                infoBox.style.display = 'block';
+              } else {
+                // 隐藏文本框
+                infoBox.style.display = 'none';
+              }
+            } else {
+              // 隐藏文本框
+              infoBox.style.display = 'none';
+            }
+
+
+
           });
 
         }
@@ -309,6 +347,11 @@
           // 初始渲染图谱（可选择任意默认模块）
           renderGraph('行政');
         });
+
+        infoBox.addEventListener('click', () => {
+          infoBox.style.display = 'none';
+        });
+
       </script>
     </div>
     <script src="\static\visual_js\flexible.js"></script>
