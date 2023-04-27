@@ -57,6 +57,11 @@
     margin-top: -120px;
     /* 使用负值来上移显示范围 */
   }
+
+  #node-limit-input {
+    width: 220px;
+    height: 140px;
+  }
 </style>
 <script src="https://unpkg.com/neo4j-driver@4.3.3/lib/browser/neo4j-web.min.js"></script>
 <script src="\static\plugins\node_modules\vis-network\standalone\umd\vis-network.min.js"></script>
@@ -117,7 +122,7 @@
       <div class="form-inline">
         <label for="module-select" class="mr-2">选择模块：</label>
         <select id="module-select" class="form-control mr-2">
-          <option value="交通">交通</option>
+          <option value="行政">行政</option>
           <option value="婚姻">婚姻</option>
           <option value="债务">债务</option>
           <option value="公司">公司</option>
@@ -128,9 +133,12 @@
           <option value="房产">房产</option>
           <option value="民商">民商</option>
           <option value="民法">民法</option>
-          <option value="行政">行政</option>
+          <option value="交通">交通</option>
         </select>
+        <input type="number" id="node-limit-input" class="form-control mr-2" min="1" max="1000" placeholder="数量">
         <button id="load-module" class="btn btn-primary">加载模块</button>
+
+
       </div>
       <div id="graph"></div>
       <div id="info-box"
@@ -143,12 +151,12 @@
 
         // 创建Neo4j驱动程序实例
         const neo4jDriver = driver('bolt://localhost:7687', auth.basic('neo4j', '12345678'));
-
+        const nodeLimitInput = document.getElementById('node-limit-input');
         // 获取图谱数据
-        async function getGraphData(moduleName) {
+        async function getGraphData(moduleName, nodeLimit) {
           const session = neo4jDriver.session();
           try {
-            const queryString = `MATCH p=(p1:模块 {name: '${moduleName}'})-[r:包含]-() RETURN p`;
+            const queryString = `MATCH p=(p1:模块 {name: '${moduleName}'})-[r:包含]-() RETURN p LIMIT ${nodeLimit}`;
             const result = await session.run(queryString);
             return result.records;
           } finally {
@@ -213,11 +221,11 @@
 
 
         // 渲染关系图谱
-        async function renderGraph(moduleName) {
+        async function renderGraph(moduleName, nodeLimit) {
           const graphContainer = document.getElementById('graph');
           graphContainer.innerHTML = ''; // 清除容器内容
 
-          const graphData = await getGraphData(moduleName);
+          const graphData = await getGraphData(moduleName, nodeLimit);
           const { nodes, edges } = prepareDataForVis(graphData);
 
           const options = {
@@ -341,11 +349,12 @@
           loadModuleButton.addEventListener('click', () => {
             const moduleSelect = document.getElementById('module-select');
             const moduleName = moduleSelect.value;
-            renderGraph(moduleName);
+            const nodeLimit = nodeLimitInput.value;
+            renderGraph(moduleName, nodeLimit);
           });
 
           // 初始渲染图谱（可选择任意默认模块）
-          renderGraph('行政');
+          renderGraph('行政', 30);
         });
 
         infoBox.addEventListener('click', () => {
