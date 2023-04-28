@@ -23,7 +23,6 @@ from wordcloud import WordCloud
 # # 保存词云图
 # wordcloud.to_file("../between_data/wordcloud_image/your_file_path.png")
 
-
 def extract_wordcloud(folder_path):
     # 循环读取文件夹中的文件
     count = 0
@@ -35,7 +34,7 @@ def extract_wordcloud(folder_path):
             df = pd.read_csv(file_path)
             # 选择某一列并将其转换为字符串
             text = ' '.join(df['question'].astype(str))
-            text = text.replace('问', '')
+            text = text.replace('问', '').replace('的', '').replace('吗', '').replace('怎么办', '').replace('可以', '').replace('如何', '').replace('是', '').replace('哪些', '').replace('什么', '').replace('有', '').replace('怎么', '')
             print(text)
             # 生成词云
             seg_list = jieba.cut(text, cut_all=False)
@@ -45,9 +44,11 @@ def extract_wordcloud(folder_path):
             wc = WordCloud(font_path='simsun.ttc', width=1000, height=800, background_color='white').generate(seg_str)
 
             # 保存词云图
-            filename = "between_data/wordcloud_image/" + file_tag + ".png"
+            filename = "F:\Computer_Design_contest\QASystemOnLawKG\static\wordcloud_image\ " + file_tag + ".png"
             wc.to_file(filename)
             count += 1
     return count
-count = extract_wordcloud('between_data/model')
+
+folder_path = r'../model'
+count = extract_wordcloud(folder_path)
 print(count)
